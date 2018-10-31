@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AppTurismo</string>
+    <string name="main_menu_activity">Menú de rutas</string>
+    <string name="desc_icono_monumentos">Botón, lista las distintas rutas de monumentos disponibles</string>
+    <string name="desc_icono_miradores">Botón, lista las distintas rutas de miradores disponibles</string>
+    <string name="desc_icono_restaurantes">Botón, lista las distintas rutas de restaurantes disponibles</string>
+</resources>
