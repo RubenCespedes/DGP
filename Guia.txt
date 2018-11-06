@@ -1,0 +1,21 @@
+Android SDK: 5.0 Lollipop API 21 - (He cambiado la versión para que podamos disponer de la herramienta Toolbar)
+Dispositivo de prueba: Pixel 2 - Pie - API 28
+
+Nomenclatura activities:		Activity Name	XxxActivity (Xxx = nombre de la clase, separar palabras con mayúscula)
+					Layout Name	activity_xxx (xxx = nombre del fichero, separar palabras con _)
+Activity menú principal 3 rutas:			MainMenuActivity - activity_main_menu
+Activity menú distintas rutas dentro de un tipo:	MenuRutasActivity - activity_menu_rutas
+Activity menú puntos interés de una ruta:
+Activity información punto interés:
+Activity mapa ruta:
+Activity ...
+
+
+Nomenclatura variables: xxx (xxx = nombre, usando mayúscula para separar palabras)
+Nomenclatura id's: xxxYyy (xxx = tipo, Yyy = nombre)
+Nomenclatura strings xxx (xxx = nombre, separar palabras con _)
+Nomenclatura imágenes xxx (xxx = nombre, separar palabras con _)
+
+Ruta imágenes: app/src/main/res/drawable
+
+Añadir contentDescription a cada elemento poniendo: (tipo de elemento), (descripción)
