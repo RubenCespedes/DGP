@@ -3,14 +3,16 @@ package com.elevensteps;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MenuRutasActivity extends AppCompatActivity {
-    private ListView list;
+    private RecyclerView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class MenuRutasActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = ((Intent) intent).getExtras();
 
-        list = (ListView) findViewById(R.id.listaRutas);
+        list = (RecyclerView) findViewById(R.id.listaRutas);
 
         if(extras != null) {
             String type = extras.getString("TipoFiltro");
@@ -48,5 +50,20 @@ public class MenuRutasActivity extends AppCompatActivity {
 
     private void populateList(String type){
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.backArrow:
+                onBackPressed();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

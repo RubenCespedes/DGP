@@ -23,9 +23,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".DescripcionRuta" />
-        <activity android:name=".PuntoDeInteres" />
-        <activity android:name=".Mapa"></activity>
+        <activity android:name=".DescripcionRuta">
+            <intent-filter>
+                <action android:name="android.intent.action.SECOND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PuntoDeInteres">
+            <intent-filter>
+                <action android:name="android.intent.action.SECOND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Mapa">
+            <intent-filter>
+                <action android:name="android.intent.action.SECOND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
