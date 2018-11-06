@@ -5,9 +5,9 @@ Nomenclatura activities:		Activity Name	XxxActivity (Xxx = nombre de la clase, s
 					Layout Name	activity_xxx (xxx = nombre del fichero, separar palabras con _)
 Activity menú principal 3 rutas:			MainMenuActivity - activity_main_menu
 Activity menú distintas rutas dentro de un tipo:	MenuRutasActivity - activity_menu_rutas
-Activity menú puntos interés de una ruta:
-Activity información punto interés:
-Activity mapa ruta:
+Activity menú descripción de una ruta:			DescripcionRutaActivity - activity_descripcion_ruta
+Activity información punto interés:			PuntoDeInteresActivity - activity_punto_de_interes
+Activity mapa ruta:					MapaActivity - activity_mapa
 Activity ...
 
 

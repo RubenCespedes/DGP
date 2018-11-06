@@ -23,21 +23,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".DescripcionRuta">
+        <activity android:name=".DescripcionRutaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SECOND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".PuntoDeInteres">
+        <activity android:name=".PuntoDeInteresActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SECOND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mapa">
+        <activity android:name=".MapaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SECOND" />
 
