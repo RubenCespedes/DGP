@@ -1,6 +1,8 @@
 package com.elevensteps;
 
 import android.content.Intent;
+import android.support.annotation.StringRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +16,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private ImageButton botonMonumentos;
     private ImageButton botonMiradores;
     private ImageButton botonRestaurantes;
+    private FloatingActionButton botonPruebas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +24,17 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.titulo_elegir_categoria);
 
         botonMonumentos = (ImageButton) findViewById(R.id.imageButtonIconoMonumentos);
         botonMiradores = (ImageButton) findViewById(R.id.imageButtonIconoMiradores);
         botonRestaurantes = (ImageButton) findViewById(R.id.imageButtonIconoRestaurantes);
+        botonPruebas = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
 
         botonMonumentos.setOnClickListener(this);
         botonMiradores.setOnClickListener(this);
         botonRestaurantes.setOnClickListener(this);
+        botonPruebas.setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +72,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             case R.id.imageButtonIconoRestaurantes:
                 FiltradoPorTipos(Filtro.RESTAURANTES);
                 break;
+            case R.id.floatingActionButton3:
+                Intent intent = new Intent(this, PuntoDeInteresActivity.class);
+                startActivity(intent);
 
         }
     }

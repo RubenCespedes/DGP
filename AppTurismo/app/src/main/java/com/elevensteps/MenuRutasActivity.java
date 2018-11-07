@@ -29,6 +29,9 @@ public class MenuRutasActivity extends AppCompatActivity {
 
         if(extras != null) {
             String type = extras.getString("TipoFiltro");
+            String titulo = getString(R.string.titulo_lista_categoria) +" " + type;
+
+            getSupportActionBar().setTitle(titulo);
             Toast.makeText(this, type, Toast.LENGTH_LONG).show();
             populateList(type);
         }else{
