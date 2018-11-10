@@ -9,7 +9,7 @@ create table usuario(
     nombre varchar not null,
     apellido varchar not null,
     correo varchar not null
-) without rowid;
+);
 
 drop table if exists gestor;
 create table gestor(
@@ -17,7 +17,7 @@ create table gestor(
 
     foreign key(nombre_usuario)
         references usuario(nombre_usuario)
-) without rowid;
+);
 
 drop table if exists turista;
 create table turista(
