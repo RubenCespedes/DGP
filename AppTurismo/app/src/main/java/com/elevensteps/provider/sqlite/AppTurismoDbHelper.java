@@ -22,7 +22,7 @@ public class AppTurismoDbHelper extends SQLiteOpenHelper {
         StringBuilder sb = new StringBuilder();
 
         try(Reader r = new BufferedReader(
-                    new InputStreamReader(context.getResources().openRawResource(R.raw.sqlite_create_schema)))) {
+                    new InputStreamReader(context.getResources().openRawResource(R.raw.create_schema)))) {
 
             char[] bytes = new char[1024];
             for(int len = r.read(); len > 0; len = r.read(bytes)) {
