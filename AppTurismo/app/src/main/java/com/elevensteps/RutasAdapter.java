@@ -7,15 +7,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.TextView;
 
-public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHolder> {
+public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHolder>{
     private static final String TAG = RutasAdapter.class.getName();
 
     private String [] mNombresRutas;
 
-    RutasAdapter(String [] nombres){
+    private final ListItemClickListener mListener;
+
+    RutasAdapter(String [] nombres, ListItemClickListener listener){
         mNombresRutas = nombres;
+        mListener = listener;
+    }
+
+    interface ListItemClickListener {
+        void onListItemClick(int itemIndex);
     }
 
     @NonNull
@@ -42,17 +50,25 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
         return mNombresRutas.length;
     }
 
-    class RutasViewHolder extends RecyclerView.ViewHolder {
+    class RutasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView ListNameView;
 
         RutasViewHolder(View itemView){
             super(itemView);
 
             ListNameView = itemView.findViewById(R.id.tv_item_ruta);
+
+            itemView.setOnClickListener(this);
         }
 
         void bind(String nombreRuta){
             ListNameView.setText(nombreRuta);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int itemClickPosition = getAdapterPosition();
+            mListener.onListItemClick(itemClickPosition);
         }
     }
 }

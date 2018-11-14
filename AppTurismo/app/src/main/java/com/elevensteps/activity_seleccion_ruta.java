@@ -1,5 +1,7 @@
 package com.elevensteps;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class activity_seleccion_ruta extends AppCompatActivity {
+public class activity_seleccion_ruta extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
     // Creamos el modelo fake
     String [] mFakeNames = {
@@ -36,7 +38,7 @@ public class activity_seleccion_ruta extends AppCompatActivity {
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new RutasAdapter(mFakeNames);
+        mAdapter = new RutasAdapter(mFakeNames, this);
         mRecyclerView.setAdapter(mAdapter);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -52,13 +54,28 @@ public class activity_seleccion_ruta extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int idOfItemSelected = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.backArrow:
+                onBackPressed();
+                return true;
 
-        if(idOfItemSelected == R.id.backArrow){
-            // Intent a la pantalla anterior
-            return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void onListItemClick(int itemIndex) {
+        Context context = activity_seleccion_ruta.this;
+
+        Class destinationActivity = PuntoDeInteresActivity.class;
+
+        Intent intent = new Intent(context, destinationActivity);
+
+        //intent.putExtra("TipoFiltro", tipo.name());
+        startActivity(intent);
     }
 }
