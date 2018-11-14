@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class activity_seleccion_ruta extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
@@ -43,6 +44,10 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Bundle extra= getIntent().getExtras();
+        String titulo = extra.get("TipoFiltro").toString();
+        Toast.makeText(this, titulo, Toast.LENGTH_SHORT).show();
+        getSupportActionBar().setTitle(titulo);
     }
 
     @Override

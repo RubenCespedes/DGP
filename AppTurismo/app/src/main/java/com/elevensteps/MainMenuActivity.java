@@ -17,7 +17,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private ImageButton botonMonumentos;
     private ImageButton botonMiradores;
     private ImageButton botonRestaurantes;
-    private FloatingActionButton botonPruebas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +29,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         botonMonumentos = (ImageButton) findViewById(R.id.imageButtonIconoMonumentos);
         botonMiradores = (ImageButton) findViewById(R.id.imageButtonIconoMiradores);
         botonRestaurantes = (ImageButton) findViewById(R.id.imageButtonIconoRestaurantes);
-        botonPruebas = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
 
         botonMonumentos.setOnClickListener(this);
         botonMiradores.setOnClickListener(this);
         botonRestaurantes.setOnClickListener(this);
-        botonPruebas.setOnClickListener(this);
     }
 
     @Override
@@ -73,10 +70,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             case R.id.imageButtonIconoRestaurantes:
                 FiltradoPorTipos(Filtro.RESTAURANTES);
                 break;
-            case R.id.floatingActionButton3:
-                Intent intent = new Intent(this, PuntoDeInteresActivity.class);
-                startActivity(intent);
-
         }
     }
 
@@ -87,7 +80,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
         Intent intent = new Intent(context, destinationActivity);
 
-        //intent.putExtra("TipoFiltro", tipo.name());
+        intent.putExtra("TipoFiltro", tipo.name());
         startActivity(intent);
     }
 

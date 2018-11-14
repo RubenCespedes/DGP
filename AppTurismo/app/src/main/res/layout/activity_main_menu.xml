@@ -68,14 +68,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/icono_restaurantes" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="77dp"
-        android:layout_height="87dp"
-        android:layout_marginStart="152dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
 </android.support.constraint.ConstraintLayout>
