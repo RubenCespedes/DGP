@@ -19,13 +19,8 @@ public class AppTurismoDbHelper extends SQLiteOpenHelper {
     private static String loadFileIntoString(InputStream is) {
         StringBuilder sb = new StringBuilder();
 
-<<<<<<< HEAD
         try(BufferedReader r = new BufferedReader(
                 new InputStreamReader(is))) {
-=======
-        try(Reader r = new BufferedReader(
-                    new InputStreamReader(context.getResources().openRawResource(R.raw.create_schema)))) {
->>>>>>> origin/master
 
             String line;
             while((line = r.readLine()) != null) {
