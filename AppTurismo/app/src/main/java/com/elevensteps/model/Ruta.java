@@ -1,14 +1,13 @@
 package com.elevensteps.model;
 
-import lombok.Value;
-import lombok.NonNull;
-
 /**
  * @author alejnp
  */
-public @Value class Ruta {
-    @NonNull String nombre;
-    @NonNull int nivelCoste;
-    @NonNull int nivelAccesibilidad;
+@lombok.Builder
+public @lombok.Value class Ruta {
+    @lombok.NonNull String nombre;
+    @lombok.NonNull String categoria;
+    @lombok.NonNull Double nivelCoste;
+    @lombok.NonNull Double nivelAccesibilidad;
     String imagen;
 }
