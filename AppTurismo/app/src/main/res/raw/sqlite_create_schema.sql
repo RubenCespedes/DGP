@@ -36,6 +36,28 @@ create table turista(
        references usuario(nombre_usuario)
 );
 
+
+
+create table punto_interes(
+    nombre varchar not null primary key,
+    lng real,
+    lat real,
+    url varchar not null default 'n/a',
+    texto varchar not null default 'n/a',
+    direccion varchar not null default 'n/a',
+    horario varchar not null default 'n/a',
+    precio real not null default 0.0 check(
+        precio >= 0.0
+    ),
+    valoracion real not null default 0.0 check(
+        valoracion between 0.0 and 5.0
+    ),
+    audio varchar,
+    imagen varchar,
+    video varchar
+);
+
+
 create table sugerencias(
    nombre varchar not null primary key,
    descripcion varchar not null default 'n/a',
@@ -67,24 +89,7 @@ create table ruta(
     imagen varchar
 );
 
-create table punto_interes(
-    nombre varchar not null primary key,
-    lng real,
-    lat real,
-    url varchar not null default 'n/a',
-    texto varchar not null default 'n/a',
-    direccion varchar not null default 'n/a',
-    horario varchar not null default 'n/a',
-    precio real not null default 0.0 check(
-        precio >= 0.0
-    ),
-    valoracion real not null default 0.0 check(
-        valoracion between 0.0 and 5.0
-    ),
-    audio varchar,
-    imagen varchar,
-    video varchar
-);
+
 
 create table contiene(
     ruta varchar not null,

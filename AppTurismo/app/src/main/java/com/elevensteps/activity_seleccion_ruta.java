@@ -14,16 +14,6 @@ import android.widget.Toast;
 
 public class activity_seleccion_ruta extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
-    // Creamos el modelo fake
-    String [] mFakeNames = {
-            "MONUMENTOS HISTORICOS",
-            "MUSEOS DE ARTE",
-            "PARQUES DE CIENCIAS",
-            "MIRADORES",
-            "BARES",
-            "RESTAURANTES"
-    };
-
     RutasAdapter mAdapter;
     RecyclerView mRecyclerView;
 
@@ -39,7 +29,7 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new RutasAdapter(mFakeNames, this);
+        mAdapter = new RutasAdapter( this, getBaseContext());
         mRecyclerView.setAdapter(mAdapter);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

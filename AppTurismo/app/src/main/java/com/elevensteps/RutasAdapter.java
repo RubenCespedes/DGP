@@ -1,6 +1,7 @@
 package com.elevensteps;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.TextView;
 
+import com.elevensteps.model.Ruta;
+import com.elevensteps.provider.sqlite.SqliteProvider;
+
+import java.util.Collection;
+
 public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHolder>{
     private static final String TAG = RutasAdapter.class.getName();
 
@@ -17,9 +23,19 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
 
     private final ListItemClickListener mListener;
 
-    RutasAdapter(String [] nombres, ListItemClickListener listener){
-        mNombresRutas = nombres;
+    RutasAdapter( ListItemClickListener listener, Context context){
+
         mListener = listener;
+
+        SqliteProvider prov = new SqliteProvider(context);
+        Collection<Ruta> Rutas = prov.retrieveAllRutas();
+
+        mNombresRutas = new String[Rutas.size()];
+        int i = 0;
+        for (Ruta ruta: Rutas ) {
+            mNombresRutas[i] = ruta.getNombre();
+            i++;
+        }
     }
 
     interface ListItemClickListener {
