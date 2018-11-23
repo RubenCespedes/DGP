@@ -6,8 +6,6 @@ INSERT INTO ruta(nombre, categoria, nivel_coste, nivel_accesibilidad, imagen)
             ('Intercambio de Idiomas', 'ocio', 0.5, 2.8, NULL),
             ('Pokémon Go', 'ocio', 0.0, 0.5, NULL);
 
--- geo:37.172627,-3.587386;crs=wgs84;u=0
-
 INSERT INTO punto_interes(nombre, lat, lng, audio, imagen, video)
      VALUES ('Bar Paco', NULL, NULL, NULL, NULL, NULL),
             ('Parada 89', NULL, NULL, NULL, NULL, NULL),

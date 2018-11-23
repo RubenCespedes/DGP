@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.elevensteps.R;
 
@@ -16,45 +17,65 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 public class AppTurismoDbHelper extends SQLiteOpenHelper {
-    private static String loadFileIntoString(InputStream is) {
+    private static String loadFileIntoString(InputStream... streams) {
         StringBuilder sb = new StringBuilder();
 
-        try(BufferedReader r = new BufferedReader(
-                new InputStreamReader(is))) {
+        for(InputStream is : streams) {
+            try (BufferedReader r = new BufferedReader(
+                    new InputStreamReader(is))) {
 
-            String line;
-            while((line = r.readLine()) != null) {
-                sb.append(line);
+                String line;
+                while ((line = r.readLine()) != null) {
+                    sb.append(line).append('\n');
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-
-        } catch(IOException e) {
-            throw new RuntimeException(e);
         }
 
         return sb.toString();
     }
 
     private final String createSql;
-    private final String insertSql;
 
     AppTurismoDbHelper(@NonNull Context context) {
         super(context, "AppTurismo.db", null, 1);
 
         Resources res = context.getResources();
 
-        this.createSql = loadFileIntoString(res.openRawResource(R.raw.sqlite_create_schema));
-        this.insertSql = loadFileIntoString(res.openRawResource(R.raw.sqlite_insert_values));
+        this.createSql = loadFileIntoString(
+                res.openRawResource(R.raw.sqlite_create_schema),
+                res.openRawResource(R.raw.sqlite_insert_values)
+        );
+    }
+
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        Log.i(AppTurismoDbHelper.class.getName(), "Abriendo BBDD (lectura)");
+        return super.getReadableDatabase();
+    }
+
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        Log.i(AppTurismoDbHelper.class.getName(), "Abriendo BBDD (escritura)");
+        return super.getReadableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(createSql);
-        db.execSQL(insertSql);
+        if(!db.isReadOnly()) {
+            for(String stmt : createSql.split(";")) {
+                db.execSQL(stmt);
+            }
+
+            Log.i(getClass().getName(), "Creado BBDD con éxito");
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        this.onCreate(db);
+        onCreate(db);
     }
 
     @Override
