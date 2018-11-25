@@ -44,9 +44,37 @@ public final class SqliteProvider {
         return arrayList;
     }
 
+    public Collection<Ruta> retrieveAllKindOfRutas(String tipo){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<Ruta> arrayList = new ArrayList<>(0);
+
+        String Query = RETRIEVE_ALL_RUTAS_SQL + " WHERE categoria=\'" + tipo + "\'";
+
+
+        try(Cursor c = db.rawQuery(Query, new String[] {})) {
+
+            arrayList.ensureCapacity(c.getCount());
+
+            while (c.moveToNext()) {
+                Ruta obj = Ruta.builder()
+                        .nombre(c.getString(c.getColumnIndex("nombre")))
+                        .categoria(c.getString(c.getColumnIndex("categoria")))
+                        .nivelCoste(c.getDouble(c.getColumnIndex("nivel_coste")))
+                        .nivelAccesibilidad((c.getDouble(c.getColumnIndex("nivel_accesibilidad"))))
+                        .imagen(c.getString(c.getColumnIndex(("imagen"))))
+                        .build();
+
+                arrayList.add(obj);
+            }
+        }
+
+
+        return arrayList;
+    }
     private static final String RETRIEVE_CAMINO_SQL = "SELECT * FROM punto_interes WHERE nombre IN (SELECT punto_de_interes FROM contiene WHERE ruta = ?)";
     public Collection<PuntoInteres> retrieveCamino(Ruta id) {
         ArrayList<PuntoInteres> arrayList = new ArrayList<>();
+
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         try(Cursor c = db.rawQuery(RETRIEVE_CAMINO_SQL, new String[] { id.getNombre() })) {

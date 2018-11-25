@@ -1,10 +1,10 @@
 INSERT INTO ruta(nombre, categoria, nivel_coste, nivel_accesibilidad, imagen) 
-     VALUES ('Visita a la Alhambra', 'cultura', 4.5, 4.0, NULL),
-            ('Ruta del Vino', 'gastronomia', 4.35, 5.0, NULL),
-            ('Tapeo de Granada',  'gastronomia', 1.55, 5.0, NULL),
-            ('Cafeterías Hipsters', 'ocio', 3.99, 4.0, NULL),
-            ('Intercambio de Idiomas', 'ocio', 0.5, 2.8, NULL),
-            ('Pokémon Go', 'ocio', 0.0, 0.5, NULL);
+     VALUES ('Visita a la Alhambra', 'Cultura', 4.5, 4.0, NULL),
+            ('Ruta del Vino', 'Gastronomia', 4.35, 5.0, NULL),
+            ('Tapeo de Granada',  'Gastronomia', 1.55, 5.0, NULL),
+            ('Cafeterías Hipsters', 'Ocio', 3.99, 4.0, NULL),
+            ('Intercambio de Idiomas', 'Ocio', 0.5, 2.8, NULL),
+            ('Pokémon Go', 'Ocio', 0.0, 0.5, NULL);
 
 INSERT INTO punto_interes(nombre, lat, lng, audio, imagen, video)
      VALUES ('Bar Paco', NULL, NULL, NULL, NULL, NULL),

@@ -23,16 +23,18 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
 
     private final ListItemClickListener mListener;
 
-    RutasAdapter( ListItemClickListener listener, Context context){
+    RutasAdapter( ListItemClickListener listener, Context context, String tipo){
 
         mListener = listener;
 
         SqliteProvider prov = new SqliteProvider(context);
-        Collection<Ruta> Rutas = prov.retrieveAllRutas();
+        Log.i("Adapter", tipo);
+        Collection<Ruta> Rutas = prov.retrieveAllKindOfRutas(tipo);
 
         mNombresRutas = new String[Rutas.size()];
         int i = 0;
         for (Ruta ruta: Rutas ) {
+
             mNombresRutas[i] = ruta.getNombre();
             i++;
         }

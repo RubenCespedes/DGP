@@ -66,9 +66,12 @@ public class AppTurismoDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         if(!db.isReadOnly()) {
             for(String stmt : createSql.split(";")) {
-                if(stmt != null) {
-                    //Log.i(getClass().getName(), "Ejecuto <" + stmt + ">");
-                    db.execSQL(stmt);
+                if(stmt != null && stmt != "") {
+                    //split mete un '\n' al final y peta
+                    if(stmt.length() > 2) {
+                        //Log.i(getClass().getName(), "Ejecuto <" + stmt + ">");
+                        db.execSQL(stmt);
+                    }
                 }
             }
             Log.i(getClass().getName(), "Creado BBDD con éxito");

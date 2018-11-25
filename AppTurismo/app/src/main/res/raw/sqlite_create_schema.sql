@@ -78,7 +78,7 @@ create table sugiere(
 create table ruta(
     nombre varchar not null primary key,
     categoria varchar not null default 'n/a' check(
-        categoria in ('cultura', 'gastronomia', 'ocio', 'n/a')
+        categoria in ('Cultura', 'Gastronomia', 'Ocio', 'n/a')
     ),
     nivel_coste real not null default 0.0 check(
         nivel_coste >= 0.0

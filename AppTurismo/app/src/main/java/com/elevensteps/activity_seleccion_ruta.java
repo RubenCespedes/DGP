@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class activity_seleccion_ruta extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
     RutasAdapter mAdapter;
+    String tipo;
     RecyclerView mRecyclerView;
 
     @Override
@@ -29,15 +30,20 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new RutasAdapter( this, getBaseContext());
+
+
+        Bundle extra= getIntent().getExtras();
+        String tipo = extra.get("TipoFiltro").toString();
+
+        mAdapter = new RutasAdapter( this, getBaseContext(), tipo);
         mRecyclerView.setAdapter(mAdapter);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Bundle extra= getIntent().getExtras();
-        String titulo = extra.get("TipoFiltro").toString();
-        Toast.makeText(this, titulo, Toast.LENGTH_SHORT).show();
-        getSupportActionBar().setTitle(titulo);
+
+
+        Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show();
+        getSupportActionBar().setTitle(tipo);
     }
 
     @Override

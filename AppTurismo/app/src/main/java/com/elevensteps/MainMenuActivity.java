@@ -62,13 +62,13 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imageButtonIconoMonumentos:
-                FiltradoPorTipos(Filtro.MONUMENTOS);
+                FiltradoPorTipos(Filtro.Cultura);
                 break;
             case R.id.imageButtonIconoMiradores:
-                FiltradoPorTipos(Filtro.MIRADORES);
+                FiltradoPorTipos(Filtro.Ocio);
                 break;
             case R.id.imageButtonIconoRestaurantes:
-                FiltradoPorTipos(Filtro.RESTAURANTES);
+                FiltradoPorTipos(Filtro.Gastronomia);
                 break;
         }
     }
