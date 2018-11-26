@@ -15,29 +15,39 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public class AppTurismoDbHelper extends SQLiteOpenHelper {
-    private static String loadFileIntoString(InputStream... streams) {
-        StringBuilder sb = new StringBuilder();
+    private static Collection<String> loadFileIntoString(InputStream... streams) {
+        ArrayList<String> listOfStamments = new ArrayList<>();
 
         for(InputStream is : streams) {
             try (BufferedReader r = new BufferedReader(
                     new InputStreamReader(is))) {
+                StringBuilder sb = new StringBuilder();
 
                 String line;
                 while ((line = r.readLine()) != null) {
-                    sb.append(line).append('\n');
+                    line = line.trim();
+
+                    sb.append(line)
+                      .append(line.endsWith(";") ? "\n" : "");
                 }
 
+                listOfStamments.addAll(Arrays.asList(sb.toString().split("\n")));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        return sb.toString();
+        return Collections.unmodifiableCollection(listOfStamments);
     }
 
-    private final String createSql;
+    private final Collection<String> createSql;
 
     AppTurismoDbHelper(@NonNull Context context) {
         super(context, "AppTurismo.db", null, 1);
@@ -64,18 +74,17 @@ public class AppTurismoDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if(!db.isReadOnly()) {
-            for(String stmt : createSql.split(";")) {
-                if(stmt != null && stmt != "") {
-                    //split mete un '\n' al final y peta
-                    if(stmt.length() > 2) {
-                        //Log.i(getClass().getName(), "Ejecuto <" + stmt + ">");
-                        db.execSQL(stmt);
-                    }
-                }
-            }
-            Log.i(getClass().getName(), "Creado BBDD con éxito");
+        if(db.isReadOnly()) {
+            throw new IllegalStateException("Error en la creación de la BBDD: Sólo lectura.");
         }
+
+        for(String stmt : createSql) {
+            Log.v(AppTurismoDbHelper.class.getName(), "stmt=" + stmt);
+
+            db.execSQL(stmt);
+        }
+
+        Log.i(getClass().getName(), "Creado BBDD con éxito");
     }
 
     @Override
