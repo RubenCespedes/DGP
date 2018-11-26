@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:transitionName="l"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
+    <!-- TextView para el titulo de la ruta -->
+    <!-- Cambiar id del TV -->
     <TextView
         android:id="@+id/tv_item_ruta"
         style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp" />
+        android:paddingTop="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp" />
+
+    <!-- TextView para la descripcion de la ruta -->
+    <TextView
+        android:id="@+id/tv_body_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
+        android:paddingTop="5dp"
+        android:paddingBottom="35dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:text="Ruta por los edificios historicos mas importantes de Granada. Catedrales, palacio Alcazar, etc..." />
+
+    <!-- TextView para el coste -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp"
+        android:text="Coste estimado: 15$" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#dadada"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_marginBottom="5dp" />
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dadada" />
+
+</LinearLayout>

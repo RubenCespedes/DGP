@@ -62,7 +62,8 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
         Log.d(TAG, "#" + position + ":" + mNombresRutas[position]);
         holder.bind(mNombresRutas[position].getNombre());
     }
-    public Ruta getElement(int index){
+
+    private Ruta getElement(int index){
         return mNombresRutas[index];
     }
 
@@ -73,17 +74,19 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
 
     class RutasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView ListNameView;
+        private TextView ListBodyView;
 
         RutasViewHolder(View itemView){
             super(itemView);
 
             ListNameView = itemView.findViewById(R.id.tv_item_ruta);
+            ListBodyView = itemView.findViewById(R.id.tv_body_item);
 
             itemView.setOnClickListener(this);
         }
 
         void bind(String nombreRuta){
-            ListNameView.setText(nombreRuta);
+            ListNameView.setText(nombreRuta.toUpperCase());
         }
 
         @Override
