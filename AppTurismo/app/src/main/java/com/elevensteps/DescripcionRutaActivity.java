@@ -37,6 +37,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         String str = args.get("RutaSeleccionada").toString();
         Ruta ruta= Utils.getGsonParser().fromJson(str, Ruta.class);
 
+        this.setTitle(ruta.getNombre());
+
         Log.d("MiDebug", ruta.getNombre());
 
         mAdapter = new DescripcionRutasAdapter( this, getBaseContext(), ruta);
