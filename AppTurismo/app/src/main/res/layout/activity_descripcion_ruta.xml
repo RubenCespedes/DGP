@@ -16,29 +16,31 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="79dp"
-        android:layout_height="118dp"
-        android:layout_marginBottom="28dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton2"
-        app:layout_constraintLeft_toLeftOf="@+id/floatingActionButton2"
-        app:layout_constraintLeft_toRightOf="@+id/floatingActionButton2"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="1.0"
-        tools:src="@drawable/ic_surround_sound_black_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton2"
         android:layout_width="79dp"
         android:layout_height="79dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="28dp"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintHorizontal_bias="0.891"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:srcCompat="@drawable/ic_check_black_24dp" />
+        app:layout_constraintTop_toTopOf="@+id/rv_puntosinteres"
+        app:layout_constraintVertical_bias="0.992"
+        tools:src="@drawable/ic_check_black_24dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_puntosinteres"
+        android:layout_width="match_parent"
+        android:layout_height="495dp"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </android.support.constraint.ConstraintLayout>

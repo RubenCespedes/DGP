@@ -26,6 +26,7 @@ INSERT INTO contiene(ruta, punto_de_interes)
             ('Visita a la Alhambra', 'Palacios Nazaríes'),
             ('Visita a la Alhambra', 'Alcazaba'),
             ('Visita a la Alhambra', 'Parador de San Francisco'),
+            ('Visita a la Alhambra', 'Hipsty'),
             ('Cafeterías Hipsters', 'El Barbitas'),
             ('Cafeterías Hipsters', 'Hipsty'),
             ('Tapeo de Granada', 'Bar Paco'),

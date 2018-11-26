@@ -19,7 +19,7 @@ import java.util.Collection;
 public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHolder>{
     private static final String TAG = RutasAdapter.class.getName();
 
-    private String [] mNombresRutas;
+    private Ruta [] mNombresRutas;
 
     private final ListItemClickListener mListener;
 
@@ -31,11 +31,11 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
         Log.i("Adapter", tipo);
         Collection<Ruta> Rutas = prov.retrieveAllKindOfRutas(tipo);
 
-        mNombresRutas = new String[Rutas.size()];
+        mNombresRutas = new Ruta[Rutas.size()];
         int i = 0;
         for (Ruta ruta: Rutas ) {
 
-            mNombresRutas[i] = ruta.getNombre();
+            mNombresRutas[i] = ruta;
             i++;
         }
     }
@@ -60,7 +60,10 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
     public void onBindViewHolder(@NonNull RutasViewHolder holder, int position) {
         // TODO MEJORAR: Almacenar el texto de la ruta en una variable
         Log.d(TAG, "#" + position + ":" + mNombresRutas[position]);
-        holder.bind(mNombresRutas[position]);
+        holder.bind(mNombresRutas[position].getNombre());
+    }
+    public Ruta getElement(int index){
+        return mNombresRutas[index];
     }
 
     @Override

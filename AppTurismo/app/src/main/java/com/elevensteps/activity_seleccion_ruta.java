@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.elevensteps.model.Ruta;
 
 public class activity_seleccion_ruta extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
@@ -72,11 +75,19 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
     public void onListItemClick(int itemIndex) {
         Context context = activity_seleccion_ruta.this;
 
-        Class destinationActivity = PuntoDeInteresActivity.class;
+        Class DescriptionActivity = DescripcionRutaActivity.class;
 
-        Intent intent = new Intent(context, destinationActivity);
+        Intent intent = new Intent(context, DescriptionActivity);
 
-        //intent.putExtra("TipoFiltro", tipo.name());
+        Ruta ruta = mAdapter.getElement(itemIndex);
+
+        Log.d("MiDebug", ruta.getNombre());
+
+        Bundle args = new Bundle();
+        String personJsonString = Utils.getGsonParser().toJson(ruta);
+        args.putString("RutaSeleccionada", personJsonString);
+        intent.putExtras(args);
+
         startActivity(intent);
     }
 }

@@ -71,27 +71,35 @@ public final class SqliteProvider {
 
         return arrayList;
     }
-    private static final String RETRIEVE_CAMINO_SQL = "SELECT * FROM punto_interes WHERE nombre IN (SELECT punto_de_interes FROM contiene WHERE ruta = ?)";
+    private static final String RETRIEVE_CAMINO_SQL = "SELECT * FROM punto_interes WHERE nombre IN (SELECT punto_de_interes FROM contiene WHERE ruta = ";
     public Collection<PuntoInteres> retrieveCamino(Ruta id) {
         ArrayList<PuntoInteres> arrayList = new ArrayList<>();
 
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        try(Cursor c = db.rawQuery(RETRIEVE_CAMINO_SQL, new String[] { id.getNombre() })) {
+
+        String query = RETRIEVE_CAMINO_SQL + "\'" + id.getNombre() + "\')";
+
+        try(Cursor c = db.rawQuery(query, new String[] {})) {
 
             arrayList.ensureCapacity(c.getCount());
+            Log.d("MiDebug",  Integer.toString(c.getCount() ));
+
+
+            int i = 0;
 
             while(c.moveToNext()) {
-
+                Log.d("MiDebug", Integer.toString(i ));
                 PuntoInteres obj = PuntoInteres.builder()
                         .nombre(c.getString(c.getColumnIndex("nombre")))
                         .lng(c.getDouble(c.getColumnIndex("lng")))
-                        .lat(c.getDouble(c.getColumnIndex("at")))
+                        .lat(c.getDouble(c.getColumnIndex("lat")))
                         .texto(c.getString(c.getColumnIndex("texto")))
                         .horario(c.getString(c.getColumnIndex("horario")))
                         .url(c.getString(c.getColumnIndex("url")))
                         .texto(c.getString(c.getColumnIndex("texto")))
                         .direccion(c.getString(c.getColumnIndex("direccion")))
+                        .precio(c.getDouble(c.getColumnIndex("precio")))
                         .valoracion(c.getDouble(c.getColumnIndex("valoracion")))
                         .audio(c.getString(c.getColumnIndex("audio")))
                         .imagen(c.getString(c.getColumnIndex("imagen")))
