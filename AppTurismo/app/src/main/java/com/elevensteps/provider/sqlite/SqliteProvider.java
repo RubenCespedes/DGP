@@ -44,14 +44,12 @@ public final class SqliteProvider {
         return arrayList;
     }
 
-    public Collection<Ruta> retrieveAllKindOfRutas(String tipo){
+    private static final String RETRIEVE_ALL_RUTAS_BY_CATEGORIA_SQL = "SELECT * FROM ruta WHERE categoria = ?";
+    public Collection<Ruta> retrieveAllKindOfRutas(String categoria){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<Ruta> arrayList = new ArrayList<>(0);
 
-        String Query = RETRIEVE_ALL_RUTAS_SQL + " WHERE categoria=\'" + tipo + "\'";
-
-
-        try(Cursor c = db.rawQuery(Query, new String[] {})) {
+        try(Cursor c = db.rawQuery(RETRIEVE_ALL_RUTAS_BY_CATEGORIA_SQL, new String[] {categoria})) {
 
             arrayList.ensureCapacity(c.getCount());
 
