@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.elevensteps.model.Ruta;
@@ -44,7 +45,6 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show();
         getSupportActionBar().setTitle(tipo);
     }
@@ -70,6 +70,8 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         }
     }
+
+
 
     @Override
     public void onListItemClick(int itemIndex) {
