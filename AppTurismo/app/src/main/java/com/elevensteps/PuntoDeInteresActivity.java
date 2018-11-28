@@ -16,11 +16,14 @@ public class PuntoDeInteresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punto_de_interes);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
         descripcion = findViewById(R.id.descripcion);
         descripcion.setText(R.string.cadena_prueba_descripcion);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Alhambra");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -33,17 +36,12 @@ public class PuntoDeInteresActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.backArrow:
+        switch (item.getItemId()){
+            case android.R.id.home:
                 onBackPressed();
                 return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
         }
+        return super.onOptionsItemSelected(item);
     }
 
 }

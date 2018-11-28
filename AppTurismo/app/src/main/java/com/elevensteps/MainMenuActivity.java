@@ -22,9 +22,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.titulo_elegir_categoria);
 
         botonMonumentos = (ImageButton) findViewById(R.id.imageButtonIconoMonumentos);
         botonMiradores = (ImageButton) findViewById(R.id.imageButtonIconoMiradores);
@@ -33,8 +30,14 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         botonMonumentos.setOnClickListener(this);
         botonMiradores.setOnClickListener(this);
         botonRestaurantes.setOnClickListener(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.titulo_elegir_categoria);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -45,18 +48,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.backArrow:
-                onBackPressed();
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
     }
+    */
 
     @Override
     public void onClick(View v) {

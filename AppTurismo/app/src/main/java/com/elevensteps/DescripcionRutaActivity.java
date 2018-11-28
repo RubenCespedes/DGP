@@ -28,10 +28,6 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descripcion_ruta);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
         next = findViewById(R.id.floatingActionButton2);
 
@@ -47,8 +43,11 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         Log.d("MiDebug", ruta.getNombre());
         next.setOnClickListener(this);
         mAdapter = new DescripcionRutasAdapter( this, getBaseContext(), ruta);
-
         mRecyclerView.setAdapter(mAdapter);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -61,17 +60,12 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.backArrow:
+        switch (item.getItemId()){
+            case android.R.id.home:
                 onBackPressed();
                 return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

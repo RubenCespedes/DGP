@@ -34,8 +34,6 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         mRecyclerView.setHasFixedSize(true);
 
-
-
         Bundle extra= getIntent().getExtras();
         String tipo = extra.get("TipoFiltro").toString();
 
@@ -44,9 +42,8 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show();
         getSupportActionBar().setTitle(tipo);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -58,17 +55,12 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.backArrow:
+        switch (item.getItemId()){
+            case android.R.id.home:
                 onBackPressed();
                 return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
         }
+        return super.onOptionsItemSelected(item);
     }
 
 

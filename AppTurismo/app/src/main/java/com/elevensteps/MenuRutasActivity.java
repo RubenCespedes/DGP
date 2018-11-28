@@ -19,8 +19,7 @@ public class MenuRutasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_rutas);
         
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         Intent intent = getIntent();
         Bundle extras = ((Intent) intent).getExtras();
@@ -38,8 +37,9 @@ public class MenuRutasActivity extends AppCompatActivity {
             Toast.makeText(this, "vacio", Toast.LENGTH_LONG).show();
         }
 
-
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -57,16 +57,11 @@ public class MenuRutasActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.backArrow:
+        switch (item.getItemId()){
+            case android.R.id.home:
                 onBackPressed();
                 return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
         }
+        return super.onOptionsItemSelected(item);
     }
 }
