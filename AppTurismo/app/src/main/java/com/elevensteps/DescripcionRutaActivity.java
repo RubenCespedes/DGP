@@ -34,9 +34,9 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
         next = findViewById(R.id.floatingActionButton2);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-
         mRecyclerView.setHasFixedSize(true);
 
         Bundle args = getIntent().getExtras();
@@ -77,7 +77,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.floatingActionButton2:
+            case R.id.ContinueToRute:
                 Intent intent = new Intent(this, MapsActivity.class);
 
                 Bundle args = new Bundle();
