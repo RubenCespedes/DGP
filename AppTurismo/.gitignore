@@ -1,11 +1,27 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches/build_file_checksums.ser
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
+# MacOS
 .DS_Store
+
+# Windows
+Thumbs.db
+
+# Ignore build files
 /build
 /captures
 .externalNativeBuild
+
+# Ignore IDEA-specific files
+*.iml
+
+# Ignore local-specific settings
+local.properties
+.classpath
+.project
+.settings
+.vscode
+.gradle
+.idea
+
+
+# Ignore SQLite3 databases
+*.sqlite3
+
