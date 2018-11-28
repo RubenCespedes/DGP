@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.elevensteps.model.Ruta;
 import com.elevensteps.provider.sqlite.SqliteProvider;
 
+import org.w3c.dom.Text;
+
 import java.util.Collection;
 
 public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHolder>{
@@ -60,8 +62,9 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
     public void onBindViewHolder(@NonNull RutasViewHolder holder, int position) {
         // TODO MEJORAR: Almacenar el texto de la ruta en una variable
         Log.d(TAG, "#" + position + ":" + mNombresRutas[position]);
-        holder.bind(mNombresRutas[position].getNombre());
+        holder.bind(mNombresRutas[position]);
     }
+
     public Ruta getElement(int index){
         return mNombresRutas[index];
     }
@@ -73,17 +76,24 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
 
     class RutasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView ListNameView;
+        private TextView ListBodyView;
+        private TextView ListCosteView;
 
         RutasViewHolder(View itemView){
             super(itemView);
 
             ListNameView = itemView.findViewById(R.id.tv_item_ruta);
+            ListBodyView = itemView.findViewById(R.id.tv_body_item_descripcion);
+            ListCosteView = itemView.findViewById(R.id.tv_body_item_coste);
 
             itemView.setOnClickListener(this);
         }
 
-        void bind(String nombreRuta){
-            ListNameView.setText(nombreRuta);
+        void bind(Ruta ruta){
+
+            ListNameView.setText(ruta.getNombre().toUpperCase());
+            ListBodyView.setText(R.string.descripcion_placeholder);
+            ListCosteView.setText(String.valueOf(ruta.getNivelCoste()));
         }
 
         @Override
