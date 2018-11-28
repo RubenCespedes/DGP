@@ -7,7 +7,8 @@
     <string name="titulo_elegir_categoria">Elija una categoría</string>
     <string name="titulo_lista_categoria">Rutas de </string>
     <string name="cadena_prueba_descripcion">De este edificio neoclásico destaca su fachada de ladrillo en la que alterna la piedra de las esquinas con la que enmarca ventanas y balcones. En ella sobresalen los frontones que culminan en los balcones del cuerpo superior.\nLa portada es monumental, aunque la estrecha calle Puentezuelas no permite disfrutarla desde mayor distancia. Destaca en ella el uso de las cuatro columnas dóricas y exentas que dan nombre al Palacio.\nEl balcón superior también presenta cuatro columnas jónicas (más bien semi-columnas adosadas), que rematan en un frontón y un amplio ático que sustenta el escudo nobiliario de los Condes de Luque.\nEn la lápida de la fachada se puede leer una inscripción en latín, que aunque está muy deteriorada, en ella se conmemora el año de su inauguración como institución académica.\nEl conjunto se vincula a los modelos derivados del edificio de la Real Academia de Bellas Artes de San Fernando de Madrid, proyectado por Juan de Villanueva.\nLa puerta principal del edificio está conformada por dos hojas realizadas en madera de pino y barnizadas imitando caoba.\nCada hoja tiene un cerrojo de hierro fundido con un tirador de barra, bisagras cónicas y una cerradura original inutilizada. Se trata de la puerta de entrada al Palacio de los Condes de Luque, de cronología encuadrable en el primer tercio del siglo XIX.</string>
-
+    <string name="descripcion_placeholder">aqui va la descripción, primo</string>
+    <string name="coste_estimado">Coste estimado (0-5):</string>
     <string name="desc_imagen_coste">Imagen que representa el coste medio de la ruta</string>
     <string name="desc_imagen_acceso">Imagen que representa el nivel de acceso medio de la ruta</string>
 
