@@ -28,10 +28,10 @@ public final class SqliteProvider {
         try(Cursor c = db.rawQuery(RETRIEVE_ALL_RUTAS_SQL, new String[] {})) {
 
             arrayList.ensureCapacity(c.getCount());
-
             while (c.moveToNext()) {
                 Ruta obj = Ruta.builder()
                         .nombre(c.getString(c.getColumnIndex("nombre")))
+                        .descripcion(c.getString(c.getColumnIndex("descripcion")))
                         .categoria(c.getString(c.getColumnIndex("categoria")))
                         .nivelCoste(c.getDouble(c.getColumnIndex("nivel_coste")))
                         .nivelAccesibilidad((c.getDouble(c.getColumnIndex("nivel_accesibilidad"))))
@@ -52,10 +52,10 @@ public final class SqliteProvider {
         try(Cursor c = db.rawQuery(RETRIEVE_ALL_RUTAS_BY_CATEGORIA_SQL, new String[] {categoria})) {
 
             arrayList.ensureCapacity(c.getCount());
-
             while (c.moveToNext()) {
                 Ruta obj = Ruta.builder()
                         .nombre(c.getString(c.getColumnIndex("nombre")))
+                        .descripcion(c.getString(c.getColumnIndex("descripcion")))
                         .categoria(c.getString(c.getColumnIndex("categoria")))
                         .nivelCoste(c.getDouble(c.getColumnIndex("nivel_coste")))
                         .nivelAccesibilidad((c.getDouble(c.getColumnIndex("nivel_accesibilidad"))))
@@ -81,13 +81,7 @@ public final class SqliteProvider {
         try(Cursor c = db.rawQuery(query, new String[] {})) {
 
             arrayList.ensureCapacity(c.getCount());
-            Log.d("MiDebug",  Integer.toString(c.getCount() ));
-
-
-            int i = 0;
-
             while(c.moveToNext()) {
-                Log.d("MiDebug", Integer.toString(i ));
                 PuntoInteres obj = PuntoInteres.builder()
                         .nombre(c.getString(c.getColumnIndex("nombre")))
                         .lng(c.getDouble(c.getColumnIndex("lng")))

@@ -1,17 +1,22 @@
 package com.elevensteps.model;
 
+import lombok.Builder;
+import lombok.Builder.Default;
+import lombok.NonNull;
+import lombok.Value;
+
 /**
  * @author alejnp
  */
-@lombok.Builder
-public @lombok.Value class PuntoInteres {
-    @lombok.NonNull String nombre;
-    @lombok.NonNull String url;
-    @lombok.NonNull String texto;
-    @lombok.NonNull String direccion;
-    @lombok.NonNull String horario;
-    @lombok.NonNull Double precio;
-    @lombok.NonNull Double valoracion;
+@Builder
+public @Value class PuntoInteres {
+    @NonNull String nombre;
+    @NonNull @Default String url = "n/a";
+    @NonNull @Default String texto = "n/a";
+    @NonNull @Default String direccion = "n/a";
+    @NonNull @Default String horario = "n/a";
+    @NonNull @Default Double precio = 0.0;
+    @NonNull @Default Double valoracion = 0.0;
     Double lng;
     Double lat;
     String audio;

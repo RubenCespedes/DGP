@@ -77,6 +77,7 @@ create table sugiere(
 
 create table ruta(
     nombre varchar not null primary key,
+    descripcion varchar not null default 'n/a',
     categoria varchar not null default 'n/a' check(
         categoria in ('Cultura', 'Gastronomia', 'Ocio', 'n/a')
     ),

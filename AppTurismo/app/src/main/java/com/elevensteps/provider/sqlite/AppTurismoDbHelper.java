@@ -50,7 +50,7 @@ public class AppTurismoDbHelper extends SQLiteOpenHelper {
     private final Collection<String> createSql;
 
     AppTurismoDbHelper(@NonNull Context context) {
-        super(context, "AppTurismo.db", null, 1);
+        super(context, "AppTurismo.db", null, 2);
 
         Resources res = context.getResources();
 
