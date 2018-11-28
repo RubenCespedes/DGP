@@ -1,10 +1,3 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/backArrow"
-        android:icon="@drawable/ic_arrow_back_black_24dp"
-        app:showAsAction="always"
-        android:title="@string/app_name">
-    </item>
-</menu>
+    xmlns:app="http://schemas.android.com/apk/res-auto"></menu>
