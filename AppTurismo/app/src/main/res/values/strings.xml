@@ -12,5 +12,12 @@
     <string name="desc_imagen_coste">Imagen que representa el coste medio de la ruta</string>
     <string name="desc_imagen_acceso">Imagen que representa el nivel de acceso medio de la ruta</string>
     <string name="title_activity_maps">Map</string>
+    <string name="funcionalidad_admin">Admin</string>
+    <string name="titulo_opciones_admin">Opciones del Administrador</string>
+    <string name="button_aniadir_ruta">Añadir ruta</string>
+    <string name="button_aniadir_punto_interes">Añadir punto de interes</string>
+    <string name="titulo_crear_ruta">Crear ruta</string>
+    <string name="titulo_crear_punto_de_interes">Crear punto de interés</string>
+    <string name="info_nombre_pi">Introduzca el nombre:</string>
 
 </resources>

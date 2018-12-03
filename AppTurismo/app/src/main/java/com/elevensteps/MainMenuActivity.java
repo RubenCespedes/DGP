@@ -37,7 +37,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -48,8 +48,18 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        int item_id = item.getItemId();
+
+        switch (item.getItemId()){
+            case R.id.ic_admin:
+                Intent i = new Intent(this, AdminOptionsActivity.class);
+                startActivity(i);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
-    */
 
     @Override
     public void onClick(View v) {
