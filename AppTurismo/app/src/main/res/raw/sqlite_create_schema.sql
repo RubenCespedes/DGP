@@ -98,9 +98,11 @@ create table contiene(
 
     primary key(ruta, punto_de_interes),
     foreign key(ruta)
-        references ruta(nombre),
+        references ruta(nombre)
+        on delete cascade,
     foreign key(punto_de_interes)
         references punto_interes(nombre)
+        on delete cascade
 );
 
 create table conecta_con(
@@ -116,7 +118,9 @@ create table conecta_con(
        punto_de_interesA != punto_de_interesB
    ),
    foreign key(punto_de_interesA)
-       references punto_de_interes(nombre),
+       references punto_de_interes(nombre)
+       on delete cascade,
    foreign key(punto_de_interesB)
        references punto_de_interes(nombre)
+       on delete cascade
 );

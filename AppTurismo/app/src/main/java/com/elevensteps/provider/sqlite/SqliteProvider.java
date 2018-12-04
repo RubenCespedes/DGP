@@ -44,14 +44,46 @@ public final class SqliteProvider {
         return arrayList;
     }
 
+    private static final String RETRIEVE_ALL_PUNTO_INTERES_SQL = "SELECT * FROM punto_interes";
+    public Collection<PuntoInteres> retrieveAllPuntoInteres() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        ArrayList<PuntoInteres> arrayList = new ArrayList<>(0);
+        try (Cursor c = db.rawQuery(RETRIEVE_ALL_PUNTO_INTERES_SQL, new String[]{})) {
+            arrayList.ensureCapacity(c.getCount());
+
+            while (c.moveToNext()) {
+                PuntoInteres obj = PuntoInteres.builder()
+                        .nombre(c.getString(c.getColumnIndex("nombre")))
+                        .lng(c.getDouble(c.getColumnIndex("lng")))
+                        .lat(c.getDouble(c.getColumnIndex("lat")))
+                        .texto(c.getString(c.getColumnIndex("texto")))
+                        .horario(c.getString(c.getColumnIndex("horario")))
+                        .url(c.getString(c.getColumnIndex("url")))
+                        .texto(c.getString(c.getColumnIndex("texto")))
+                        .direccion(c.getString(c.getColumnIndex("direccion")))
+                        .precio(c.getDouble(c.getColumnIndex("precio")))
+                        .valoracion(c.getDouble(c.getColumnIndex("valoracion")))
+                        .audio(c.getString(c.getColumnIndex("audio")))
+                        .imagen(c.getString(c.getColumnIndex("imagen")))
+                        .video(c.getString(c.getColumnIndex("video")))
+                        .build();
+
+                arrayList.add(obj);
+            }
+        }
+
+        return arrayList;
+    }
+
     private static final String RETRIEVE_ALL_RUTAS_BY_CATEGORIA_SQL = "SELECT * FROM ruta WHERE categoria = ?";
     public Collection<Ruta> retrieveAllKindOfRutas(String categoria){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
         ArrayList<Ruta> arrayList = new ArrayList<>(0);
-
         try(Cursor c = db.rawQuery(RETRIEVE_ALL_RUTAS_BY_CATEGORIA_SQL, new String[] {categoria})) {
-
             arrayList.ensureCapacity(c.getCount());
+
             while (c.moveToNext()) {
                 Ruta obj = Ruta.builder()
                         .nombre(c.getString(c.getColumnIndex("nombre")))
@@ -66,21 +98,17 @@ public final class SqliteProvider {
             }
         }
 
-
         return arrayList;
     }
-    private static final String RETRIEVE_CAMINO_SQL = "SELECT * FROM punto_interes WHERE nombre IN (SELECT punto_de_interes FROM contiene WHERE ruta = ";
+
+    private static final String RETRIEVE_CAMINO_SQL = "SELECT * FROM punto_interes WHERE nombre IN (SELECT punto_de_interes FROM contiene WHERE ruta = ?)";
     public Collection<PuntoInteres> retrieveCamino(Ruta id) {
-        ArrayList<PuntoInteres> arrayList = new ArrayList<>();
-
-
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String query = RETRIEVE_CAMINO_SQL + "\'" + id.getNombre() + "\')";
-
-        try(Cursor c = db.rawQuery(query, new String[] {})) {
-
+        ArrayList<PuntoInteres> arrayList = new ArrayList<>(0);
+        try(Cursor c = db.rawQuery(RETRIEVE_CAMINO_SQL, new String[] { id.getNombre() })) {
             arrayList.ensureCapacity(c.getCount());
+
             while(c.moveToNext()) {
                 PuntoInteres obj = PuntoInteres.builder()
                         .nombre(c.getString(c.getColumnIndex("nombre")))
@@ -108,7 +136,36 @@ public final class SqliteProvider {
     private static final String DOES_GESTOR_EXIST_SQL = "SELECT 1 FROM gestor WHERE nombre_usuario = (SELECT nombre_usuario FROM usuario WHERE nombre_usuario = ? AND contraseña = ?)";
     public boolean doesGestorExist(String nombre, String contraseña) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
         try(Cursor c = db.rawQuery(DOES_GESTOR_EXIST_SQL, new String[] { nombre, contraseña })) {
+            if(c.getCount() == 0) return false;
+        }
+
+        return true;
+    }
+
+    private static final String DOES_RUTA_EXIST_SQL = "SELECT 1 FROM ruta WHERE nombre = ?";
+    private static final String INSERT_RUTA_SQL =
+            "INSERT INTO ruta(nombre, descripcion, categoria, nivel_coste, nivel_accesibilidad, imagen) values(?, ?, ?, ?, ?, ?)";
+    public boolean insertRuta(Ruta obj) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try(Cursor c = db.rawQuery(DOES_RUTA_EXIST_SQL, new String[] { obj.getNombre() })) {
+            if(c.getCount() > 0) return false;
+        }
+
+        final String[] values = {
+                String.valueOf(obj.getNombre()),
+                String.valueOf(obj.getDescripcion()),
+                String.valueOf(obj.getCategoria()),
+                String.valueOf(obj.getNivelCoste()),
+                String.valueOf(obj.getNivelAccesibilidad()),
+                String.valueOf(obj.getImagen())
+        };
+
+        db.execSQL(INSERT_RUTA_SQL, values);
+
+        try(Cursor c = db.rawQuery(DOES_RUTA_EXIST_SQL, new String[] { obj.getNombre() })) {
             if(c.getCount() == 0) return false;
         }
 
@@ -144,6 +201,48 @@ public final class SqliteProvider {
 
         try(Cursor c = db.rawQuery(DOES_PUNTO_INTERES_EXIST_SQL, new String[] { obj.getNombre() })) {
             if(c.getCount() == 0) return false;
+        }
+
+        return true;
+    }
+
+    private static final String INSERT_CAMINO_SQL = "INSERT INTO contiene(ruta, punto_de_interes) values (?, ?)";
+    public boolean insertCamino(Ruta ruta, Collection<PuntoInteres> puntos_interes) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try(Cursor c = db.rawQuery(DOES_RUTA_EXIST_SQL, new String[] { ruta.getNombre() })) {
+            if(c.getCount() == 0) return false;
+        }
+
+        for(PuntoInteres pi : puntos_interes) {
+            try(Cursor c = db.rawQuery(DOES_PUNTO_INTERES_EXIST_SQL, new String[] { pi.getNombre() })) {
+                if(c.getCount() == 0) return false;
+            }
+
+
+            final String[] values = {
+                    String.valueOf(ruta.getNombre()),
+                    String.valueOf(pi.getNombre())
+            };
+
+            db.execSQL(INSERT_CAMINO_SQL, values);
+        }
+
+        return true;
+    }
+
+    private static final String DELETE_RUTA_SQL = "DELETE FROM ruta WHERE nombre = ?";
+    public boolean deleteRuta(Ruta obj) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try(Cursor c = db.rawQuery(DOES_RUTA_EXIST_SQL, new String[] { obj.getNombre() })) {
+            if(c.getCount() == 0) return false;
+        }
+
+        db.execSQL(DELETE_RUTA_SQL, new String[] { obj.getNombre() });
+
+        try(Cursor c = db.rawQuery(DOES_RUTA_EXIST_SQL, new String[] { obj.getNombre() })) {
+            if(c.getCount() > 0) return false;
         }
 
         return true;
