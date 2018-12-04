@@ -16,6 +16,6 @@ Nomenclatura id's: xxxYyy (xxx = tipo, Yyy = nombre)
 Nomenclatura strings xxx (xxx = nombre, separar palabras con _)
 Nomenclatura imágenes xxx (xxx = nombre, separar palabras con _)
 
-Ruta imágenes: app/src/main/res/drawable
+Ruta imágenes: app/src/main/res/drawableasda
 
 Añadir contentDescription a cada elemento poniendo: (tipo de elemento), (descripción)
