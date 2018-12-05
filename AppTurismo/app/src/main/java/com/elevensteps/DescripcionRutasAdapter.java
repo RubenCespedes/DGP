@@ -28,18 +28,14 @@ public class DescripcionRutasAdapter extends RecyclerView.Adapter<DescripcionRut
 
         SqliteProvider prov = new SqliteProvider(context);
 
-        Log.d("MiDebug", miRuta.getNombre() + " Previa query");
-        Collection<PuntoInteres> PuntosDeInteres = prov.retrieveCamino(miRuta);
-        Log.d("MiDebug","PostQuery");
 
-        Log.d("MiDebug", Integer.toString(PuntosDeInteres.size()));
+        Collection<PuntoInteres> PuntosDeInteres = prov.retrieveCamino(miRuta);
+
         mPuntosInteres = new PuntoInteres[PuntosDeInteres.size()];
         int i = 0;
         for (PuntoInteres punto: PuntosDeInteres ) {
 
             mPuntosInteres[i] = punto;
-
-            Log.d("MiDebug", "Nombres Punto Interes :" + mPuntosInteres[i].getNombre());
 
             i++;
         }
@@ -74,6 +70,10 @@ public class DescripcionRutasAdapter extends RecyclerView.Adapter<DescripcionRut
     @Override
     public int getItemCount() {
         return mPuntosInteres.length;
+    }
+
+    public PuntoInteres getItemAt(int index){
+        return mPuntosInteres[index];
     }
 
     class RutasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

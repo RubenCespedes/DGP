@@ -1,15 +1,26 @@
 package com.elevensteps;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.VideoView;
 
-public class PuntoDeInteresActivity extends AppCompatActivity {
+import com.elevensteps.model.PuntoInteres;
+
+public class PuntoDeInteresActivity extends AppCompatActivity implements View.OnClickListener {
     TextView descripcion;
+    VideoView video;
+    PuntoInteres puntoInteres;
+    MediaPlayer mediaPlayer;
+    FloatingActionButton audioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +29,45 @@ public class PuntoDeInteresActivity extends AppCompatActivity {
 
 
         descripcion = findViewById(R.id.descripcion);
+        video = findViewById(R.id.videoView2);
+        audioButton = findViewById(R.id.AudioButton);
+
+
         descripcion.setText(R.string.cadena_prueba_descripcion);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Alhambra");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle args = getIntent().getExtras();
+        String str = args.get("PuntoInteres").toString();
+        puntoInteres = Utils.getGsonParser().fromJson(str, PuntoInteres.class);
+
+        getSupportActionBar().setTitle(puntoInteres.getNombre());
+        descripcion.setText(puntoInteres.getTexto());
+
+        if(puntoInteres.getVideo() instanceof String) {
+            Uri myUri = Uri.parse(puntoInteres.getVideo());
+            video.setVideoURI(myUri);
+        }
+
+
+
+    }
+
+    @Override
+    public void onClick(View v){
+        switch(v.getId()){
+            case R.id.AudioButton:
+                mediaPlayer = MediaPlayer.create(this, R.raw.fachada);
+                mediaPlayer.start();
+                break;
+            case R.id.NextButton:
+
+
+                break;
+        }
     }
 
     @Override

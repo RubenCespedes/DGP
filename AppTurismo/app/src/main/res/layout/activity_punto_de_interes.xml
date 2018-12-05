@@ -8,35 +8,35 @@
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:id="@+id/AudioButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="18dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="50dp"
+        android:src="@drawable/ic_surround_sound_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:focusable="true"
-        tools:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_surround_sound_black_24dp" />
+        tools:layout_constraintRight_toRightOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:id="@+id/NextButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="18dp"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_fast_forward_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:focusable="auto"
         tools:layout_constraintWidth_default="100dp"
         tools:layout_constraintWidth_max="100dp"
-        tools:layout_constraintWidth_min="50dp"
-        android:src="@drawable/ic_fast_forward_black_24dp" />
+        tools:layout_constraintWidth_min="50dp" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/AudioButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="56dp"
                 android:layout_marginRight="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
