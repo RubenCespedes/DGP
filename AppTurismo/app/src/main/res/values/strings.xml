@@ -19,5 +19,6 @@
     <string name="titulo_crear_ruta">Crear ruta</string>
     <string name="titulo_crear_punto_de_interes">Crear punto de interés</string>
     <string name="info_nombre_pi">Introduzca el nombre:</string>
+    <string name="ruta_asociada">Ruta asociada</string>
 
 </resources>
