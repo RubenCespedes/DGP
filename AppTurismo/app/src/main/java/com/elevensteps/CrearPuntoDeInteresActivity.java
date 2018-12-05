@@ -74,7 +74,7 @@ public class CrearPuntoDeInteresActivity extends AppCompatActivity  {
         String nombre = nombreText.getText().toString();
         ruta_seleccionada = (String) spinner.getSelectedItem();
 
-        Log.d("MiDebug", "ANTES");
+        
 
         PuntoInteres puntoInteres = PuntoInteres.builder()
                 .nombre(nombre)
@@ -92,7 +92,7 @@ public class CrearPuntoDeInteresActivity extends AppCompatActivity  {
                 .video("PRUEBA")
                 .build();
 
-        Log.d("MiDebug", "DESPUES");
+
 
         SqliteProvider prov = new SqliteProvider(this);
         prov.insertPuntoInteres(puntoInteres);
