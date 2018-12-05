@@ -232,6 +232,31 @@ public final class SqliteProvider {
         return true;
     }
 
+    private static final String ASOCIAR_RUTA_PUNTO = "INSERT INTO contiene(ruta, punto_de_interes) values (?, ?)";
+    public boolean asociarRutaConPunto(String nombreRuta, String nombrePuntoInteres) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try(Cursor c = db.rawQuery(DOES_RUTA_EXIST_SQL, new String[] { nombreRuta })) {
+            if(c.getCount() == 0) return false;
+        }
+
+
+        try(Cursor c = db.rawQuery(DOES_PUNTO_INTERES_EXIST_SQL, new String[] { nombrePuntoInteres })) {
+            if(c.getCount() == 0) return false;
+        }
+
+
+        final String[] values = {
+                String.valueOf(nombreRuta),
+                String.valueOf(nombrePuntoInteres)
+        };
+
+        db.execSQL(ASOCIAR_RUTA_PUNTO, values);
+
+
+        return true;
+    }
+
     private static final String DELETE_RUTA_SQL = "DELETE FROM ruta WHERE nombre = ?";
     public boolean deleteRuta(Ruta obj) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
