@@ -92,7 +92,7 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
         void bind(Ruta ruta){
 
             ListNameView.setText(ruta.getNombre().toUpperCase());
-            ListBodyView.setText(R.string.descripcion_placeholder);
+            ListBodyView.setText(ruta.getDescripcion());
             ListCosteView.setText(String.valueOf(ruta.getNivelCoste()));
         }
 

@@ -44,13 +44,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapaActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SECOND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".activity_seleccion_ruta"
             android:parentActivityName=".MainMenuActivity">

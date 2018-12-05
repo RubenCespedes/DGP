@@ -16,7 +16,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/ContinueToRute"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
