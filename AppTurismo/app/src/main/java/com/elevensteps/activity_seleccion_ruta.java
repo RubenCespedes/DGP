@@ -79,8 +79,6 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
         Ruta ruta = mAdapter.getElement(itemIndex);
 
-        Log.d("MiDebug", ruta.getNombre());
-
         Bundle args = new Bundle();
         String personJsonString = Utils.getGsonParser().toJson(ruta);
         args.putString("RutaSeleccionada", personJsonString);

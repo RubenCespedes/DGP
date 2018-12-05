@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
 
 public class DescripcionRutaActivity extends AppCompatActivity implements DescripcionRutasAdapter.ListItemClickListener, View.OnClickListener  {
@@ -29,7 +30,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         setContentView(R.layout.activity_descripcion_ruta);
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
-        next = findViewById(R.id.floatingActionButton2);
+        next = findViewById(R.id.ContinueToRute);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -40,7 +41,6 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         ruta = Utils.getGsonParser().fromJson(str, Ruta.class);
         this.setTitle(ruta.getNombre());
 
-        Log.d("MiDebug", ruta.getNombre());
         next.setOnClickListener(this);
         mAdapter = new DescripcionRutasAdapter( this, getBaseContext(), ruta);
         mRecyclerView.setAdapter(mAdapter);
@@ -64,10 +64,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.ic_admin:
-                Intent i = new Intent(this, AdminOptionsActivity.class);
-                startActivity(i);
-                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -79,8 +76,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
                 Intent intent = new Intent(this, MapsActivity.class);
 
                 Bundle args = new Bundle();
-                String personJsonString = Utils.getGsonParser().toJson(ruta);
-                args.putString("RutaSeleccionada", personJsonString);
+                String arg = Utils.getGsonParser().toJson(ruta);
+                args.putString("RutaSeleccionada", arg);
                 intent.putExtras(args);
                 startActivity(intent);
                 break;
@@ -90,6 +87,15 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
     @Override
     public void onListItemClick(int itemIndex) {
+        Intent intent = new Intent(this, PuntoDeInteresActivity.class);
+
+        Bundle args = new Bundle();
+        PuntoInteres pi = mAdapter.getItemAt(itemIndex);
+
+        String arg = Utils.getGsonParser().toJson(pi);
+        args.putString("PuntoInteres", arg);
+        intent.putExtras(args);
+        startActivity(intent);
 
     }
 }
