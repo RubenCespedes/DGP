@@ -4,13 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public final class SqliteProvider {
 
@@ -21,7 +22,7 @@ public final class SqliteProvider {
     }
 
     private static final String RETRIEVE_ALL_RUTAS_SQL = "SELECT * FROM ruta";
-    public Collection<Ruta> retrieveAllRutas() {
+    public List<Ruta> retrieveAllRutas() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         ArrayList<Ruta> arrayList = new ArrayList<>(0);
@@ -41,11 +42,11 @@ public final class SqliteProvider {
                 arrayList.add(obj);
             }
         }
-        return arrayList;
+        return Collections.unmodifiableList(arrayList);
     }
 
     private static final String RETRIEVE_ALL_PUNTO_INTERES_SQL = "SELECT * FROM punto_interes";
-    public Collection<PuntoInteres> retrieveAllPuntoInteres() {
+    public List<PuntoInteres> retrieveAllPuntoInteres() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         ArrayList<PuntoInteres> arrayList = new ArrayList<>(0);
@@ -73,11 +74,11 @@ public final class SqliteProvider {
             }
         }
 
-        return arrayList;
+        return Collections.unmodifiableList(arrayList);
     }
 
     private static final String RETRIEVE_ALL_RUTAS_BY_CATEGORIA_SQL = "SELECT * FROM ruta WHERE categoria = ?";
-    public Collection<Ruta> retrieveAllKindOfRutas(String categoria){
+    public List<Ruta> retrieveAllKindOfRutas(String categoria){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         ArrayList<Ruta> arrayList = new ArrayList<>(0);
@@ -98,11 +99,11 @@ public final class SqliteProvider {
             }
         }
 
-        return arrayList;
+        return Collections.unmodifiableList(arrayList);
     }
 
     private static final String RETRIEVE_CAMINO_SQL = "SELECT * FROM punto_interes WHERE nombre IN (SELECT punto_de_interes FROM contiene WHERE ruta = ?)";
-    public Collection<PuntoInteres> retrieveCamino(Ruta id) {
+    public List<PuntoInteres> retrieveCamino(Ruta id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         ArrayList<PuntoInteres> arrayList = new ArrayList<>(0);
@@ -130,7 +131,7 @@ public final class SqliteProvider {
             }
         }
 
-        return arrayList;
+        return Collections.unmodifiableList(arrayList);
     }
 
     private static final String DOES_GESTOR_EXIST_SQL = "SELECT 1 FROM gestor WHERE nombre_usuario = (SELECT nombre_usuario FROM usuario WHERE nombre_usuario = ? AND contraseña = ?)";
