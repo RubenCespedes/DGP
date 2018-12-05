@@ -68,7 +68,7 @@ public class CrearPuntoDeInteresActivity extends AppCompatActivity {
         SqliteProvider prov = new SqliteProvider(this);
         prov.insertPuntoInteres(puntoInteres);
 
-        Toast toast = Toast.makeText(this, "PUNTO DE INTERES INTRODUCIDO", Toast.LENGTH_ LONG);
+        Toast toast = Toast.makeText(this, "PUNTO DE INTERES INTRODUCIDO", Toast.LENGTH_LONG);
         toast.show();
 
         Intent i = new Intent(this, AdminOptionsActivity.class);
