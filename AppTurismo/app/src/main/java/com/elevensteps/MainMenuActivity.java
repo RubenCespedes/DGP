@@ -1,9 +1,11 @@
 package com.elevensteps;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,6 +37,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.titulo_elegir_categoria);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
     }
 
 
