@@ -1,5 +1,6 @@
 package com.elevensteps;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elevensteps.model.PuntoInteres;
@@ -23,6 +26,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     FloatingActionButton next;
     Ruta ruta;
     RecyclerView mRecyclerView;
+    ImageView imagen_ruta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
         next = findViewById(R.id.ContinueToRute);
+        imagen_ruta = findViewById(R.id.iv_puntosinteres);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -44,6 +49,10 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         next.setOnClickListener(this);
         mAdapter = new DescripcionRutasAdapter( this, getBaseContext(), ruta);
         mRecyclerView.setAdapter(mAdapter);
+
+        Context context = imagen_ruta.getContext();
+        int id = context.getResources().getIdentifier("imagen01", "drawable", context.getPackageName());
+        imagen_ruta.setImageResource(id);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
