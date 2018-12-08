@@ -19,34 +19,34 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <Button
-        android:id="@+id/button_aniadir_ruta"
+        android:id="@+id/b_gestionar_rutas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/button_aniadir_ruta"
+        android:text="Gestionar rutas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.404" />
 
     <Button
-        android:id="@+id/button_aniadir_punto_interes"
+        android:id="@+id/b_gestionar_puntos_interes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/button_aniadir_punto_interes"
+        android:text="Gestionar puntos de interés"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.604" />
 </android.support.constraint.ConstraintLayout>

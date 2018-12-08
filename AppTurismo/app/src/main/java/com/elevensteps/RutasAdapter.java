@@ -31,7 +31,15 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
 
         SqliteProvider prov = new SqliteProvider(context);
         Log.i("Adapter", tipo);
-        Collection<Ruta> Rutas = prov.retrieveAllKindOfRutas(tipo);
+
+        Collection<Ruta> Rutas;
+
+        if (tipo == "Todas") {
+            Rutas = prov.retrieveAllRutas();
+        }
+        else {
+            Rutas = prov.retrieveAllKindOfRutas(tipo);
+        }
 
         mNombresRutas = new Ruta[Rutas.size()];
         int i = 0;

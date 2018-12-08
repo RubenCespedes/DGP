@@ -1,3 +1,4 @@
+
 package com.elevensteps;
 
 import android.content.Context;
@@ -20,15 +21,15 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_options);
 
-        aniadir_ruta = (Button) findViewById(R.id.button_aniadir_ruta);
-        aniadir_punto_interes = (Button) findViewById(R.id.button_aniadir_punto_interes);
+        aniadir_ruta = (Button) findViewById(R.id.b_gestionar_rutas);
+        aniadir_punto_interes = (Button) findViewById(R.id.b_gestionar_puntos_interes);
 
         aniadir_ruta.setOnClickListener(this);
         aniadir_punto_interes.setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.titulo_opciones_admin);
+        getSupportActionBar().setTitle("Opciones Administrador");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -53,11 +54,11 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         Class destinationActivity = AdminOptionsActivity.class;
 
         switch(id) {
-            case R.id.button_aniadir_punto_interes:
-                destinationActivity = CrearPuntoDeInteresActivity.class;
+            case R.id.b_gestionar_rutas:
+                destinationActivity = GestionRutasActivity.class;
                 break;
-            case R.id.button_aniadir_ruta:
-                destinationActivity = CrearRutaActivity.class;
+            case R.id.b_gestionar_puntos_interes:
+                destinationActivity = GestionPuntosDeInteresActivity.class;
                 break;
         }
 

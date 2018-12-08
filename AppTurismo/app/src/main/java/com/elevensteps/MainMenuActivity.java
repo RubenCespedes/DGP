@@ -49,8 +49,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int item_id = item.getItemId();
-
         switch (item.getItemId()){
             case R.id.ic_admin:
                 Intent i = new Intent(this, AdminOptionsActivity.class);
