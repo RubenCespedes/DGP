@@ -4,56 +4,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.elevensteps.model.PuntoInteres;
-import com.elevensteps.model.Ruta;
 import com.elevensteps.provider.sqlite.SqliteProvider;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+public class CrearPuntoDeInteresActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class CrearPuntoDeInteresActivity extends AppCompatActivity  {
-
-    Spinner spinner;
-    String ruta_seleccionada;
-    private static String NO_ASOCIAR_RUTA;
+    Button button_crear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_punto_de_interes);
+        setContentView(R.layout.activity_crear);
 
-        spinner = findViewById(R.id.spinner);
-        NO_ASOCIAR_RUTA = getResources().getString(R.string.ruta_no_seleccionada);
+        button_crear = (Button) findViewById(R.id.button_crear);
+        button_crear.setOnClickListener(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.titulo_crear_punto_de_interes);
+        getSupportActionBar().setTitle("Crear punto de interés");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-        SqliteProvider prov = new SqliteProvider(this);
-        Collection<Ruta> rutas = prov.retrieveAllRutas();
-        ArrayList<String> rutas2 = new ArrayList();
-        rutas2.add(NO_ASOCIAR_RUTA);
-        for(Ruta r: rutas){
-            rutas2.add(r.getNombre());
-        }
-
-        ArrayAdapter<String> adaptador = new ArrayAdapter(this, R.layout.list_item_simple,R.id.textview, rutas2);
-        spinner.setAdapter(adaptador);
-
-
     }
 
 
@@ -67,14 +43,19 @@ public class CrearPuntoDeInteresActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View view) {
 
-    public void createPI(View view) {
+        if (view.getId() == R.id.button_crear) {
+            createPI();
+        }
+    }
 
-        EditText nombreText = (EditText) findViewById(R.id.pi_nombre);
+
+    public void createPI() {
+
+        EditText nombreText = (EditText) findViewById(R.id.crear_nombre);
         String nombre = nombreText.getText().toString();
-        ruta_seleccionada = (String) spinner.getSelectedItem();
-
-        
 
         PuntoInteres puntoInteres = PuntoInteres.builder()
                 .nombre(nombre)
@@ -92,22 +73,22 @@ public class CrearPuntoDeInteresActivity extends AppCompatActivity  {
                 .video("PRUEBA")
                 .build();
 
-
-
         SqliteProvider prov = new SqliteProvider(this);
-        prov.insertPuntoInteres(puntoInteres);
 
-        if(!ruta_seleccionada.equals(NO_ASOCIAR_RUTA)){
-            prov.asociarRutaConPunto(ruta_seleccionada, nombre);
+        boolean result = prov.insertPuntoInteres(puntoInteres);
+
+        if(result) {
+            Toast toast = Toast.makeText(this, "PUNTO DE INTERES INTRODUCIDO", Toast.LENGTH_LONG);
+            toast.show();
+
+            Intent i = new Intent(this, GestionPuntosDeInteresActivity.class);
+            startActivity(i);
         }
+        else {
+            nombreText.setText("");
 
-        Toast toast = Toast.makeText(this, "PUNTO DE INTERES INTRODUCIDO", Toast.LENGTH_LONG);
-        toast.show();
-
-        Intent i = new Intent(this, AdminOptionsActivity.class);
-        startActivity(i);
+            Toast toast = Toast.makeText(this, "ESE PUNTO DE INTERÉS YA EXISTE", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
-
-
 }
-
