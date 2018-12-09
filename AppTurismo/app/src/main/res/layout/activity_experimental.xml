@@ -68,8 +68,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Start"
-        app:layout_constraintStart_toStartOf="@+id/AddLocation"
-        app:layout_constraintTop_toBottomOf="@+id/AddLocation" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonAddLocation" />
 
     <Button
         android:id="@+id/ButtonStop"
@@ -78,11 +78,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Stop"
-        app:layout_constraintStart_toStartOf="@+id/ButtonStart"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ButtonStart" />
 
     <Button
-        android:id="@+id/AddLocation"
+        android:id="@+id/ButtonAddLocation"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -95,9 +95,20 @@
         android:id="@+id/textViewEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonAddTrayecto"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/ButtonAddTrayecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:layout_marginBottom="8dp"
+        android:text="Añadir Trayecto"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ButtonStart" />
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

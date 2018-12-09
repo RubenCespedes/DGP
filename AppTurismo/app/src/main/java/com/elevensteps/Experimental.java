@@ -13,15 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.provider.sqlite.SqliteProvider;
 
 import java.math.RoundingMode;
-import java.security.Permission;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,6 +37,8 @@ public class Experimental extends AppCompatActivity implements View.OnClickListe
     Button start;
     Button stop;
     Button record;
+    Button addTrayecto;
+    String trayecto;  // Cadena del tipo double,double(token)double,double(token)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +54,13 @@ public class Experimental extends AppCompatActivity implements View.OnClickListe
         PuntoBLabel.setText(R.string.experimental);
         start = (Button) findViewById(R.id.ButtonStart);
         stop = (Button) findViewById(R.id.ButtonStop);
-        record = (Button) findViewById(R.id.AddLocation);
+        record = (Button) findViewById(R.id.ButtonAddLocation);
+        addTrayecto = (Button) findViewById(R.id.ButtonAddTrayecto);
 
         start.setOnClickListener(this);
         stop.setOnClickListener(this);
         record.setOnClickListener(this);
+        addTrayecto.setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -105,7 +108,7 @@ public class Experimental extends AppCompatActivity implements View.OnClickListe
         DecimalFormat df = new DecimalFormat("#.####");
         df.setRoundingMode(RoundingMode.CEILING);
         String cadena = "Long: " + df.format(longitude) + "Lat: " + df.format(latitude);
-
+        trayecto += df.format(longitude) + "," + df.format(latitude) + ";";
         estado.setText(cadena);
 
     }
@@ -132,9 +135,26 @@ public class Experimental extends AppCompatActivity implements View.OnClickListe
                 estado.setText("PARADO");
                 break;
 
-            case R.id.AddLocation:
+            case R.id.ButtonAddLocation:
                 Location lkl = locationManager.getLastKnownLocation(locationProvider);
                 addLocation(lkl.getLongitude(), lkl.getAltitude(), lkl.getAltitude());
+                break;
+
+            case R.id.ButtonAddTrayecto:
+                String primerPunto = (String) PuntoA.getSelectedItem();
+                String segundoPunto = (String) PuntoB.getSelectedItem();
+
+                if(primerPunto.equals(segundoPunto)){
+                    Toast.makeText(this, "Los dos puntos de interes seleccionados, deben ser diferentes", Toast.LENGTH_SHORT).show();
+                }else{
+                    SqliteProvider prov = new SqliteProvider(this);
+
+                    // TODO usar la base de datos para crear la entrada en Conecta
+                    // Usar primerPunto, segundoPunto y trayecto(string)
+                    // prov.conecta
+                }
+
+
                 break;
         }
     }
