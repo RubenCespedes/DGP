@@ -21,17 +21,23 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
     PuntoInteres puntoInteres;
     MediaPlayer mediaPlayer;
     FloatingActionButton audioButton;
+    FloatingActionButton nextButton;
+    boolean sonando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punto_de_interes);
 
+        sonando = false;
 
         descripcion = findViewById(R.id.descripcion);
         video = findViewById(R.id.videoView2);
         audioButton = findViewById(R.id.AudioButton);
+        nextButton = findViewById(R.id.NextButton);
 
+        audioButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
 
         descripcion.setText(R.string.cadena_prueba_descripcion);
 
@@ -47,6 +53,8 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
         getSupportActionBar().setTitle(puntoInteres.getNombre());
         descripcion.setText(puntoInteres.getTexto());
 
+        mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
+
         if(puntoInteres.getVideo() instanceof String) {
             Uri myUri = Uri.parse(puntoInteres.getVideo());
             video.setVideoURI(myUri);
@@ -60,11 +68,18 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
     public void onClick(View v){
         switch(v.getId()){
             case R.id.AudioButton:
-                mediaPlayer = MediaPlayer.create(this, R.raw.fachada);
-                mediaPlayer.start();
+
+                if(!sonando) {
+                    mediaPlayer.start();
+                    sonando = true;
+                }
+                else{
+                    sonando = false;
+                    mediaPlayer.pause();
+                }
                 break;
             case R.id.NextButton:
-
+                //TODO pasar al siguiente punto de interes con el mapa
 
                 break;
         }
