@@ -25,7 +25,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Experimental extends AppCompatActivity implements View.OnClickListener {
+public class CrearTrayectoActivity extends AppCompatActivity implements View.OnClickListener {
     private static String locationProvider = LocationManager.GPS_PROVIDER;
     Spinner PuntoA;
     Spinner PuntoB;
@@ -43,7 +43,7 @@ public class Experimental extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_experimental);
+        setContentView(R.layout.activity_crear_trayecto);
 
 
         PuntoALabel = (TextView) findViewById(R.id.PuntoAlabel);

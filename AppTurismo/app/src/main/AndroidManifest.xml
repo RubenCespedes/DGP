@@ -86,7 +86,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Experimental"></activity>
+        <activity android:name=".CrearTrayectoActivity"></activity>
     </application>
 
 </manifest>

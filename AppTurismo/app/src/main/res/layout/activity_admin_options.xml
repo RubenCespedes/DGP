@@ -52,11 +52,11 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_crear_trayecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Experimental"
+        android:layout_marginTop="28dp"
+        android:text="@string/crear_trayecto_boton"
         app:layout_constraintEnd_toEndOf="@+id/button_aniadir_ruta"
         app:layout_constraintStart_toStartOf="@+id/button_aniadir_ruta"
         app:layout_constraintTop_toBottomOf="@+id/button_aniadir_ruta" />

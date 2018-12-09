@@ -8,13 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 public class AdminOptionsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button aniadir_ruta;
     private Button aniadir_punto_interes;
-    private Button experimental;
+    private Button crear_trayecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +22,11 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
 
         aniadir_ruta = (Button) findViewById(R.id.button_aniadir_ruta);
         aniadir_punto_interes = (Button) findViewById(R.id.button_aniadir_punto_interes);
-        experimental = (Button) findViewById(R.id.button2);
+        crear_trayecto = (Button) findViewById(R.id.button_crear_trayecto);
 
         aniadir_ruta.setOnClickListener(this);
         aniadir_punto_interes.setOnClickListener(this);
-        experimental.setOnClickListener(this);
+        crear_trayecto.setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,8 +61,8 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
             case R.id.button_aniadir_ruta:
                 destinationActivity = CrearRutaActivity.class;
                 break;
-            case R.id.button2:
-                destinationActivity = Experimental.class;
+            case R.id.button_crear_trayecto:
+                destinationActivity = CrearTrayectoActivity.class;
                 break;
         }
 
