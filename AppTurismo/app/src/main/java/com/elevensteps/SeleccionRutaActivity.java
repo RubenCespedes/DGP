@@ -7,43 +7,40 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.elevensteps.model.Ruta;
 
-public class activity_seleccion_ruta extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
+public class SeleccionRutaActivity extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
     RutasAdapter mAdapter;
     String tipo;
     RecyclerView mRecyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seleccion_ruta);
+    protected void onCreate( Bundle savedInstanceState ) {
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_seleccion_ruta );
 
-        mRecyclerView = findViewById(R.id.rv_rutas);
+        mRecyclerView = findViewById( R.id.rv_rutas );
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setLayoutManager( linearLayoutManager );
 
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize( true );
 
         Bundle extra= getIntent().getExtras();
-        String tipo = extra.get("TipoFiltro").toString();
+        String tipo = extra.get( "TipoFiltro" ).toString();
 
         mAdapter = new RutasAdapter( this, getBaseContext(), tipo);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter( mAdapter );
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(tipo);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = findViewById( R.id.toolbar );
+        setSupportActionBar( toolbar );
+        getSupportActionBar().setTitle( ( getResources().getString( R.string.titulo_seleccion_ruta ) + "<" + tipo + ">").toUpperCase() );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
     }
 
     @Override
@@ -59,6 +56,10 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.ic_admin:
+                Intent i = new Intent(this, AdminOptionsActivity.class);
+                startActivity(i);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -67,15 +68,13 @@ public class activity_seleccion_ruta extends AppCompatActivity implements RutasA
 
     @Override
     public void onListItemClick(int itemIndex) {
-        Context context = activity_seleccion_ruta.this;
+        Context context = SeleccionRutaActivity.this;
 
         Class DescriptionActivity = DescripcionRutaActivity.class;
 
         Intent intent = new Intent(context, DescriptionActivity);
 
         Ruta ruta = mAdapter.getElement(itemIndex);
-
-        Log.d("MiDebug", ruta.getNombre());
 
         Bundle args = new Bundle();
         String personJsonString = Utils.getGsonParser().toJson(ruta);

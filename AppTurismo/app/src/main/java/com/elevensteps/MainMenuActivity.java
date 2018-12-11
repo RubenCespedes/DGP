@@ -2,8 +2,6 @@ package com.elevensteps;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,7 +35,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -48,8 +46,16 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.ic_admin:
+                Intent i = new Intent(this, AdminOptionsActivity.class);
+                startActivity(i);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
-    */
 
     @Override
     public void onClick(View v) {
@@ -69,7 +75,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private void FiltradoPorTipos(Filtro tipo) {
         Context context = MainMenuActivity.this;
 
-        Class destinationActivity = activity_seleccion_ruta.class;
+        Class destinationActivity = SeleccionRutaActivity.class;
 
         Intent intent = new Intent(context, destinationActivity);
 

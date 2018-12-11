@@ -1,6 +1,11 @@
 package com.elevensteps;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+import android.media.MediaPlayer;
+import android.net.Uri;
+>>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+<<<<<<< HEAD
 import android.widget.Toast;
 
 import com.elevensteps.model.PuntoInteres;
@@ -26,14 +32,36 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
     private Ruta ruta;
     private Bundle args;
     SqliteProvider provider;
+=======
+import android.widget.VideoView;
+
+import com.elevensteps.model.PuntoInteres;
+
+public class PuntoDeInteresActivity extends AppCompatActivity implements View.OnClickListener {
+    TextView descripcion;
+    VideoView video;
+    PuntoInteres puntoInteres;
+    MediaPlayer mediaPlayer;
+    FloatingActionButton audioButton;
+    FloatingActionButton nextButton;
+    boolean sonando;
+>>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punto_de_interes);
 
+        sonando = false;
 
         descripcion = findViewById(R.id.descripcion);
+        video = findViewById(R.id.videoView2);
+        audioButton = findViewById(R.id.AudioButton);
+        nextButton = findViewById(R.id.NextButton);
+
+        audioButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
+
         descripcion.setText(R.string.cadena_prueba_descripcion);
         siguiente = findViewById(R.id.siguiente_camino);
         provider = new SqliteProvider(this);
@@ -45,15 +73,46 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(puntoInteres.getNombre());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle args = getIntent().getExtras();
+        String str = args.get("PuntoInteres").toString();
+        puntoInteres = Utils.getGsonParser().fromJson(str, PuntoInteres.class);
+
+        getSupportActionBar().setTitle(puntoInteres.getNombre());
+        descripcion.setText(puntoInteres.getTexto());
+
+        mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
+
+        if(puntoInteres.getVideo() instanceof String) {
+            Uri myUri = Uri.parse(puntoInteres.getVideo());
+            video.setVideoURI(myUri);
+        }
+
+
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main_menu, menu);
-        return true;
+    public void onClick(View v){
+        switch(v.getId()){
+            case R.id.AudioButton:
+
+                if(!sonando) {
+                    mediaPlayer.start();
+                    sonando = true;
+                }
+                else{
+                    sonando = false;
+                    mediaPlayer.pause();
+                }
+                break;
+            case R.id.NextButton:
+                //TODO pasar al siguiente punto de interes con el mapa
+
+                break;
+        }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

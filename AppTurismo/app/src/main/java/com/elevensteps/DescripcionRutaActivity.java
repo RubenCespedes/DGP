@@ -1,5 +1,6 @@
 package com.elevensteps;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elevensteps.model.PuntoInteres;
@@ -26,7 +29,11 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     FloatingActionButton next;
     Ruta ruta;
     RecyclerView mRecyclerView;
+<<<<<<< HEAD
     SqliteProvider provider;
+=======
+    ImageView imagen_ruta;
+>>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,13 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         setContentView(R.layout.activity_descripcion_ruta);
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
+<<<<<<< HEAD
         next = findViewById(R.id.ContinueToRoute);
         provider = new SqliteProvider(this);
+=======
+        next = findViewById(R.id.ContinueToRute);
+        imagen_ruta = findViewById(R.id.iv_puntosinteres);
+>>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -46,10 +58,13 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         ruta = Utils.getGsonParser().fromJson(str, Ruta.class);
         this.setTitle(ruta.getNombre());
 
-        Log.d("MiDebug", ruta.getNombre());
         next.setOnClickListener(this);
         mAdapter = new DescripcionRutasAdapter( this, getBaseContext(), ruta);
         mRecyclerView.setAdapter(mAdapter);
+
+        Context context = imagen_ruta.getContext();
+        int id = context.getResources().getIdentifier( ruta.getImagen(), "drawable", context.getPackageName() );
+        imagen_ruta.setImageResource(id);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,6 +85,10 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.ic_admin:
+                Intent i = new Intent(this, AdminOptionsActivity.class);
+                startActivity(i);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -77,6 +96,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
+<<<<<<< HEAD
             case R.id.ContinueToRoute:
                 Collection<PuntoInteres> puntosBD = provider.retrieveCamino(ruta);
                 int contador = 0;
@@ -97,6 +117,16 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
                 else {
                     Toast.makeText(this, "Las coordenadas de los puntos aún no han sido cargadas", Toast.LENGTH_LONG).show();
                 }
+=======
+            case R.id.ContinueToRute:
+                Intent intent = new Intent(this, MapsActivity.class);
+
+                Bundle args = new Bundle();
+                String arg = Utils.getGsonParser().toJson(ruta);
+                args.putString("RutaSeleccionada", arg);
+                intent.putExtras(args);
+                startActivity(intent);
+>>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
                 break;
 
         }
@@ -104,6 +134,15 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
     @Override
     public void onListItemClick(int itemIndex) {
+        Intent intent = new Intent(this, PuntoDeInteresActivity.class);
+
+        Bundle args = new Bundle();
+        PuntoInteres pi = mAdapter.getItemAt(itemIndex);
+
+        String arg = Utils.getGsonParser().toJson(pi);
+        args.putString("PuntoInteres", arg);
+        intent.putExtras(args);
+        startActivity(intent);
 
     }
 }
