@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity_seleccion_ruta"
+            android:name=".SeleccionRutaActivity"
             android:parentActivityName=".MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

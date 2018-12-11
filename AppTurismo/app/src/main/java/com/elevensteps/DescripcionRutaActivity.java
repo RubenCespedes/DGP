@@ -51,7 +51,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         mRecyclerView.setAdapter(mAdapter);
 
         Context context = imagen_ruta.getContext();
-        int id = context.getResources().getIdentifier("imagen01", "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier( ruta.getImagen(), "drawable", context.getPackageName() );
         imagen_ruta.setImageResource(id);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

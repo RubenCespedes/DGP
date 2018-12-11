@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">AppTurismo</string>
     <string name="main_menu_activity">Menú de rutas</string>
-    <string name="desc_icono_monumentos">Botón, lista las distintas rutas de monumentos disponibles</string>
-    <string name="desc_icono_miradores">Botón, lista las distintas rutas de miradores disponibles</string>
-    <string name="desc_icono_restaurantes">Botón, lista las distintas rutas de restaurantes disponibles</string>
-    <string name="titulo_elegir_categoria">Elija una categoría</string>
+    <string name="desc_imagen_cultura">Botón, lista las distintas rutas de cultura disponibles</string>
+    <string name="desc_imagen_ocio">Botón, lista las distintas rutas de ocio disponibles</string>
+    <string name="desc_imagen_gastronomia">Botón, lista las distintas rutas gastronómicas disponibles</string>
+    <string name="titulo_elegir_categoria">SELECCIONA TIPO RUTA</string>
     <string name="titulo_lista_categoria">Rutas de </string>
     <string name="cadena_prueba_descripcion">De este edificio neoclásico destaca su fachada de ladrillo en la que alterna la piedra de las esquinas con la que enmarca ventanas y balcones. En ella sobresalen los frontones que culminan en los balcones del cuerpo superior.\nLa portada es monumental, aunque la estrecha calle Puentezuelas no permite disfrutarla desde mayor distancia. Destaca en ella el uso de las cuatro columnas dóricas y exentas que dan nombre al Palacio.\nEl balcón superior también presenta cuatro columnas jónicas (más bien semi-columnas adosadas), que rematan en un frontón y un amplio ático que sustenta el escudo nobiliario de los Condes de Luque.\nEn la lápida de la fachada se puede leer una inscripción en latín, que aunque está muy deteriorada, en ella se conmemora el año de su inauguración como institución académica.\nEl conjunto se vincula a los modelos derivados del edificio de la Real Academia de Bellas Artes de San Fernando de Madrid, proyectado por Juan de Villanueva.\nLa puerta principal del edificio está conformada por dos hojas realizadas en madera de pino y barnizadas imitando caoba.\nCada hoja tiene un cerrojo de hierro fundido con un tirador de barra, bisagras cónicas y una cerradura original inutilizada. Se trata de la puerta de entrada al Palacio de los Condes de Luque, de cronología encuadrable en el primer tercio del siglo XIX.</string>
     <string name="descripcion_placeholder">aqui va la descripción, primo</string>
@@ -20,4 +20,9 @@
     <string name="ruta_asociada">Ruta asociada</string>
     <string name="ruta_no_seleccionada">No asociar a ninguna ruta</string>
     <string name="imagen_puntos_ruta">Imagen de la ruta</string>
+
+    <string name="titulo_seleccion_ruta">rutas</string>
+    <string name="cultura">CULTURA</string>
+    <string name="ocio">OCIO</string>
+    <string name="gastronomia">GASTRONOMIA</string>
 </resources>

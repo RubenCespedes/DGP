@@ -29,17 +29,17 @@ public final class SqliteProvider {
         try(Cursor c = db.rawQuery(RETRIEVE_ALL_RUTAS_SQL, new String[] {})) {
 
             arrayList.ensureCapacity(c.getCount());
-            while (c.moveToNext()) {
+            while ( c.moveToNext() ){
                 Ruta obj = Ruta.builder()
-                        .nombre(c.getString(c.getColumnIndex("nombre")))
-                        .descripcion(c.getString(c.getColumnIndex("descripcion")))
-                        .categoria(c.getString(c.getColumnIndex("categoria")))
-                        .nivelCoste(c.getDouble(c.getColumnIndex("nivel_coste")))
-                        .nivelAccesibilidad((c.getDouble(c.getColumnIndex("nivel_accesibilidad"))))
-                        .imagen(c.getString(c.getColumnIndex(("imagen"))))
+                        .nombre( c.getString( c.getColumnIndex( "nombre" ) ) )
+                        .descripcion( c.getString( c.getColumnIndex( "descripcion" ) ) )
+                        .categoria( c.getString( c.getColumnIndex( "categoria" ) ) )
+                        .nivelCoste( c.getDouble( c.getColumnIndex( "nivel_coste" ) ) )
+                        .nivelAccesibilidad( c.getDouble( c.getColumnIndex( "nivel_accesibilidad" ) ) )
+                        .imagen( c.getString( c.getColumnIndex( "imagen" ) ) )
                         .build();
 
-                arrayList.add(obj);
+                arrayList.add( obj );
             }
         }
         return Collections.unmodifiableList(arrayList);
