@@ -29,7 +29,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         setContentView(R.layout.activity_descripcion_ruta);
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
-        next = findViewById(R.id.floatingActionButton2);
+        next = findViewById(R.id.ContinueToRoute);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -71,12 +71,14 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.ContinueToRute:
+            case R.id.ContinueToRoute:
                 Intent intent = new Intent(this, MapsActivity.class);
 
                 Bundle args = new Bundle();
+                int punto_inicio_ruta = 0;
                 String personJsonString = Utils.getGsonParser().toJson(ruta);
                 args.putString("RutaSeleccionada", personJsonString);
+                args.putInt("PuntoInicial", punto_inicio_ruta);
                 intent.putExtras(args);
                 startActivity(intent);
                 break;

@@ -11,21 +11,6 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:focusable="true"
-        tools:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_surround_sound_black_24dp" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="18dp"
         android:clickable="true"
@@ -36,6 +21,22 @@
         tools:layout_constraintWidth_default="100dp"
         tools:layout_constraintWidth_max="100dp"
         tools:layout_constraintWidth_min="50dp"
+
+        android:src="@drawable/ic_surround_sound_black_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/siguiente_camino"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="18dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:focusable="true"
+        tools:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_fast_forward_black_24dp" />
 
     <android.support.v7.widget.Toolbar
@@ -54,11 +55,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.493">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
