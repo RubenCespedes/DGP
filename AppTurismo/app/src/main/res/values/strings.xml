@@ -12,9 +12,7 @@
     <string name="desc_imagen_coste">Imagen que representa el coste medio de la ruta</string>
     <string name="desc_imagen_acceso">Imagen que representa el nivel de acceso medio de la ruta</string>
     <string name="title_activity_maps">Map</string>
-<<<<<<< HEAD
     <string name="titulo_maps">Camino a</string>
-=======
     <string name="funcionalidad_admin">Admin</string>
     <string name="titulo_gestion_rutas">Gestión de rutas</string>
     <string name="button_aniadir_ruta">Añadir ruta</string>
@@ -23,7 +21,6 @@
     <string name="ruta_asociada">Ruta asociada</string>
     <string name="ruta_no_seleccionada">No asociar a ninguna ruta</string>
     <string name="imagen_puntos_ruta">Imagen de la ruta</string>
->>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 
     <string name="titulo_seleccion_ruta">rutas</string>
     <string name="cultura">CULTURA</string>

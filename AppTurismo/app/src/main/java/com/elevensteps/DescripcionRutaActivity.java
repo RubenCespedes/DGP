@@ -29,11 +29,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     FloatingActionButton next;
     Ruta ruta;
     RecyclerView mRecyclerView;
-<<<<<<< HEAD
     SqliteProvider provider;
-=======
     ImageView imagen_ruta;
->>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +38,9 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         setContentView(R.layout.activity_descripcion_ruta);
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
-<<<<<<< HEAD
         next = findViewById(R.id.ContinueToRoute);
         provider = new SqliteProvider(this);
-=======
-        next = findViewById(R.id.ContinueToRute);
         imagen_ruta = findViewById(R.id.iv_puntosinteres);
->>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -96,7 +89,6 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-<<<<<<< HEAD
             case R.id.ContinueToRoute:
                 Collection<PuntoInteres> puntosBD = provider.retrieveCamino(ruta);
                 int contador = 0;
@@ -117,16 +109,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
                 else {
                     Toast.makeText(this, "Las coordenadas de los puntos aún no han sido cargadas", Toast.LENGTH_LONG).show();
                 }
-=======
-            case R.id.ContinueToRute:
-                Intent intent = new Intent(this, MapsActivity.class);
 
-                Bundle args = new Bundle();
-                String arg = Utils.getGsonParser().toJson(ruta);
-                args.putString("RutaSeleccionada", arg);
-                intent.putExtras(args);
-                startActivity(intent);
->>>>>>> 4b86fdd0060987f12e5c5181f65c3b60ede90f53
                 break;
 
         }

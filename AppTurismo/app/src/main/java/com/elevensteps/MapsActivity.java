@@ -77,11 +77,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Collection<PuntoInteres> puntosBD = provider.retrieveCamino(ruta);
 
         for( PuntoInteres pto : puntosBD) {
-            if (pto.hasCoordinates()) {
-                puntos.add(pto);
-                LatLng punto = new LatLng(pto.getLat(),pto.getLng());
-                marcadores.add(mMap.addMarker(new MarkerOptions().position(punto).title(pto.getNombre())));
-            }
+            puntos.add(pto);
+            LatLng punto = new LatLng(pto.getLat(),pto.getLng());
+            marcadores.add(mMap.addMarker(new MarkerOptions().position(punto).title(pto.getNombre())));
+
         }
         punto_actual = puntos.get(punto_inicial_int);
         punto_siguiente = puntos.get(punto_destino_int);
@@ -127,12 +126,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.sig_punto :
+
                 Intent intent = new Intent(this, PuntoDeInteresActivity.class);
                 Bundle args = new Bundle();
+
                 String personJsonString = Utils.getGsonParser().toJson(ruta);
                 String personJsonString2 = Utils.getGsonParser().toJson(punto_siguiente);
                 args.putString("RutaSeleccionada", personJsonString);
-                args.putString("PuntoDeInteres", personJsonString2);
+                args.putString("PuntoInteres", personJsonString2);
                 args.putInt("PuntoActual", punto_destino_int);
                 intent.putExtras(args);
                 startActivity(intent);
