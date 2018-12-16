@@ -82,7 +82,7 @@ public class GestionRutaEspecificaActivity extends AppCompatActivity implements 
                 startActivity(intent);
                 break;
             case R.id.b_borrar:
-                deleteDialog();
+                deleteRutaDialog();
                 break;
         }
     }
@@ -90,11 +90,54 @@ public class GestionRutaEspecificaActivity extends AppCompatActivity implements 
 
     @Override
     public void onListItemClick(int itemIndex) {
+        Intent intent = new Intent(this, PuntoDeInteresActivity.class);
+
+        PuntoInteres pi = adapter.getItemAt(itemIndex);
+
+        deletePuntoInteresDialog(pi);
 
     }
 
+    public void deletePuntoInteresDialog(final PuntoInteres puntoInteres) {
 
-    public void deleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(puntoInteres.getNombre())
+                .setMessage("¿Desea borrar el punto de interés de esta ruta?")
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                borrarPuntoDeInteres(puntoInteres);
+                            }
+                        })
+                .setNegativeButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+        builder.create();
+        builder.show();
+    }
+
+
+    private void borrarPuntoDeInteres(PuntoInteres puntoInteres) {
+
+        SqliteProvider provider = new SqliteProvider(getBaseContext());
+        provider.deletePuntoInteresFromRuta(puntoInteres, ruta);
+
+        Toast toast = Toast.makeText(this, puntoInteres.getNombre() + " BORRADO", Toast.LENGTH_LONG);
+        toast.show();
+
+        finish();
+        startActivity(getIntent());
+    }
+
+
+    public void deleteRutaDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
