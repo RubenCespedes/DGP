@@ -64,6 +64,10 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         nextButton.setOnClickListener(this);
         args = getIntent().getExtras();
         String str2 = args.get("PuntoInteres").toString();
+        Object en_ruta = args.get("EnRuta");
+        if(en_ruta != null){
+            nextButton.hide();
+        }
         puntoInteres = Utils.getGsonParser().fromJson(str2, PuntoInteres.class);
         titulo.setText(puntoInteres.getNombre());
         descripcion.setText(puntoInteres.getTexto());

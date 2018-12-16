@@ -124,6 +124,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
         String arg = Utils.getGsonParser().toJson(pi);
         args.putString("PuntoInteres", arg);
+        args.putString("EnRuta", "No");
         intent.putExtras(args);
         startActivity(intent);
 
