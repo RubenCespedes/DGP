@@ -85,12 +85,6 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
 
                     String cadenas[] = url.split("=");
 
-
-                    for (String str: cadenas ) {
-                        Log.d("MiDebug", str);
-                    }
-
-
                     if(cadenas.length > 2) {
                         cadenas[1] = cadenas[1].substring(0, cadenas[1].length()-2); // quitar &t
                         timestamp = Integer.parseInt(cadenas[2]) * 1000;
