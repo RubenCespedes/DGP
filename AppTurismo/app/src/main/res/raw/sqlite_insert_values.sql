@@ -14,19 +14,19 @@ INSERT INTO punto_interes(nombre, lng, lat, texto, direccion, precio, audio, ima
      VALUES
      ('Alhambra', -3.588068, 37.176434,
      'Ciudad palatina medieval con salón del trono cubierto de yeserías y patios interiores porticados con fuentes',
-     'Calle Real de la Alhambra, s/n, 18009 Granada', 59.00, NULL, 'alhambra', 'https://youtu.be/SUSndxkdRno'),
+     'Calle Real de la Alhambra, s/n, 18009 Granada', 59.00, NULL, 'alhambra', 'www.youtube.com/watch?v=SUSndxkdRno'),
      ('Patio de los leones', -3.589206, 37.177358,
      'Palacio morisco de la Alhambra y Patio de los Leones, con complejo hidráulico y la famosa fuente decorativa',
      'Calle Real de la Alhambra, s/n, 18009 Granada', 0.0, NULL, 'patio_leones', NULL),
      ('Palacios Nazaríes', -3.589740, 37.177440,
      'Palacios nazaríes de la Alhambra con patios, salas de audiencia y estancias realdes de intrincados disenios',
-     'Calle Real de la Alhambra, s/n, 18009 Granada', 0.0, NULL, 'palacios_nazaries', 'https://youtu.be/SUSndxkdRno?t=1122'),
+     'Calle Real de la Alhambra, s/n, 18009 Granada', 0.0, NULL, 'palacios_nazaries', 'www.youtube.com/watch?v=SUSndxkdRno&t=1122'),
      ('Palacio de Carlos V', -3.589991, 37.176919,
      'Residencia del emperador, de estilo renacentista, con un gran patio interior y museos dentro de la Alhambra',
-     'Calle Real de la Alhambra, s/n, 18009 Granada', 0.0, NULL, 'carlos_v', 'https://youtu.be/SUSndxkdRno?t=2735'),
+     'Calle Real de la Alhambra, s/n, 18009 Granada', 0.0, NULL, 'carlos_v', 'www.youtube.com/watch?v=SUSndxkdRno&t=2735'),
      ('Generalife', -3.584605, 37.178704,
      'Antiguo palacio musulmán con elegantes jardines ornamentales, estanques, patios y flora exuberante',
-     'Paseo del Generalife, 1A, 18009 Granada', 0.0, NULL, 'generalife', 'https://youtu.be/SUSndxkdRno?t=2968');
+     'Paseo del Generalife, 1A, 18009 Granada', 0.0, NULL, 'generalife', 'www.youtube.com/watch?v=SUSndxkdRno&t=2968');
 
 INSERT INTO contiene(ruta, punto_de_interes)
     VALUES ('El legado árabe', 'Alhambra'),
