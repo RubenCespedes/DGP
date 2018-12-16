@@ -25,6 +25,8 @@ public class GestionRutaEspecificaActivity extends AppCompatActivity implements 
     FloatingActionButton aniadir;
     FloatingActionButton borrar;
     Ruta ruta;
+    private int tipoColor;
+    private String titulo;
 
 
     @Override
@@ -33,8 +35,9 @@ public class GestionRutaEspecificaActivity extends AppCompatActivity implements 
         setContentView(R.layout.activity_gestion);
 
         Bundle args = getIntent().getExtras();
-        String str = args.get("RutaSeleccionada").toString();
-        ruta = Utils.getGsonParser().fromJson(str, Ruta.class);
+        titulo = args.get("RutaSeleccionada").toString();
+        tipoColor = args.getInt("TipoColor");
+        ruta = Utils.getGsonParser().fromJson(titulo, Ruta.class);
         this.setTitle(ruta.getNombre());
 
         Toolbar toolbar = findViewById(R.id.toolbar);

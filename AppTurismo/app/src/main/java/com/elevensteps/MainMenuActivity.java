@@ -80,6 +80,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = new Intent(context, destinationActivity);
 
         intent.putExtra("TipoFiltro", tipo.name());
+        intent.putExtra("ColorFiltro", tipo.getColor());
         startActivity(intent);
     }
 

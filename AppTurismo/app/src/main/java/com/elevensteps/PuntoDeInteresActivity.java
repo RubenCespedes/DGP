@@ -41,6 +41,7 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
     private YouTubePlayerView video;
     boolean sonando;
     private SqliteProvider provider;
+    private int tipoColor;
 
 
     @Override
@@ -64,6 +65,7 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         nextButton.setOnClickListener(this);
         args = getIntent().getExtras();
         String str2 = args.get("PuntoInteres").toString();
+        tipoColor = args.getInt("TipoColor");
         Object en_ruta = args.get("EnRuta");
         if(en_ruta != null){
             nextButton.hide();
@@ -153,6 +155,8 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
                     Bundle args2 = new Bundle();
                     String personJsonString = Utils.getGsonParser().toJson(ruta);
                     args2.putString("RutaSeleccionada", personJsonString);
+                    args2.putString("NombreRuta", ruta.getNombre());
+                    args2.putInt("TipoColor", tipoColor);
                     args2.putInt("PuntoInicial", puntoActual);
                     intent.putExtras(args2);
                     startActivity(intent);

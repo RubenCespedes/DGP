@@ -5,7 +5,7 @@ INSERT INTO ruta(nombre, descripcion, categoria, nivel_coste, nivel_accesibilida
      'Cultura', 3.0, 3.0, 'legado_arabe'),
      ('Granada cristiana y judía',
      'Recorrido por los principales monasterios, catedrales y monumentos relacionados con el cristianismo en Granada',
-     'Cultura', 1.0, 4.5, 'cristianos_judios'),
+     'Cultura', 0.0, 4.5, 'cristianos_judios'),
      ('Museos',
      'Recorrido por todos los museos de la ciudad. Desde el Parque de las Ciencias hasta el Centro Federico Garcia Lorca',
      'Cultura', 3.5, 3.0, 'parque_ciencias');

@@ -2,6 +2,7 @@ package com.elevensteps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +17,8 @@ import com.elevensteps.model.Ruta;
 public class SeleccionRutaActivity extends AppCompatActivity implements RutasAdapter.ListItemClickListener {
 
     RutasAdapter mAdapter;
-    String tipo;
+    String tipoNombre;
+    int tipoColor;
     RecyclerView mRecyclerView;
 
     @Override
@@ -32,14 +34,16 @@ public class SeleccionRutaActivity extends AppCompatActivity implements RutasAda
         mRecyclerView.setHasFixedSize( true );
 
         Bundle extra= getIntent().getExtras();
-        String tipo = extra.get( "TipoFiltro" ).toString();
+        this.tipoNombre = extra.getString( "TipoFiltro" , "");
+        this.tipoColor = extra.getInt("ColorFiltro", Color.WHITE);
 
-        mAdapter = new RutasAdapter( this, getBaseContext(), tipo);
+        mAdapter = new RutasAdapter( this, getBaseContext(), tipoNombre);
         mRecyclerView.setAdapter( mAdapter );
 
         Toolbar toolbar = findViewById( R.id.toolbar );
+        toolbar.setBackgroundColor(tipoColor);
         setSupportActionBar( toolbar );
-        getSupportActionBar().setTitle( ( getResources().getString( R.string.titulo_seleccion_ruta ) + "<" + tipo + ">").toUpperCase() );
+        getSupportActionBar().setTitle( String.format( getResources().getString( R.string.titulo_seleccion_ruta ), tipoNombre) );
         getSupportActionBar().setDisplayHomeAsUpEnabled( true );
     }
 
@@ -79,6 +83,7 @@ public class SeleccionRutaActivity extends AppCompatActivity implements RutasAda
         Bundle args = new Bundle();
         String personJsonString = Utils.getGsonParser().toJson(ruta);
         args.putString("RutaSeleccionada", personJsonString);
+        args.putInt("TipoColor", tipoColor);
         intent.putExtras(args);
 
         startActivity(intent);

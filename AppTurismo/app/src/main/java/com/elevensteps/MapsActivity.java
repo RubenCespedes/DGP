@@ -52,6 +52,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         provider = new SqliteProvider(this);
         sig_punto = findViewById(R.id.sig_punto);
+
     }
 
 
@@ -96,9 +97,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng zoom = new LatLng (latitud_zoom, longitud_zoom);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( zoom, ZOOM));
 
+        String title = args.getString("NombreRuta");
+        int color = args.getInt("TipoColor");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(title);
+        toolbar.setBackgroundColor(color);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mapa");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         polyline1 = mMap.addPolyline(new PolylineOptions(). clickable(true).add(

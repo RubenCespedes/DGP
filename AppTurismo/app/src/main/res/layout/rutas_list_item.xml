@@ -53,13 +53,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="5dp"
-        android:background="#dadada" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#dadada" />
+        android:layout_height="3dp"
+        android:layout_marginBottom="12dp"
+        android:background="#000" />
 
 </LinearLayout>

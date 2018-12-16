@@ -2,6 +2,7 @@ package com.elevensteps;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -99,9 +100,16 @@ public class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.RutasViewHol
 
         void bind(Ruta ruta){
 
-            ListNameView.setText(ruta.getNombre().toUpperCase());
+            ListNameView.setText(ruta.getNombre());
             ListBodyView.setText(ruta.getDescripcion());
-            ListCosteView.setText(String.valueOf(ruta.getNivelCoste()));
+
+            double cost = ruta.getNivelCoste();
+            int roundedCost = (int) Math.round(cost);
+
+            String strCost = (cost == 0.0) ? "Gratuito" : new String(new char[roundedCost]).replace("\0", "€");
+
+            ListCosteView.setText(strCost);
+            ListCosteView.setTextColor(Color.parseColor("#339900"));
         }
 
         @Override

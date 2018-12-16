@@ -31,6 +31,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     RecyclerView mRecyclerView;
     SqliteProvider provider;
     ImageView imagen_ruta;
+    private String tituloStr;
+    private int tipoColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,10 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         mRecyclerView.setHasFixedSize(true);
 
         Bundle args = getIntent().getExtras();
-        String str = args.get("RutaSeleccionada").toString();
-        ruta = Utils.getGsonParser().fromJson(str, Ruta.class);
+        tituloStr = args.get("RutaSeleccionada").toString();
+        tipoColor = args.getInt("TipoColor");
+
+        ruta = Utils.getGsonParser().fromJson(tituloStr, Ruta.class);
         this.setTitle(ruta.getNombre());
 
         next.setOnClickListener(this);
@@ -60,6 +64,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         imagen_ruta.setImageResource(id);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(tipoColor);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -102,6 +107,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
                     int punto_inicio_ruta = 0;
                     String personJsonString = Utils.getGsonParser().toJson(ruta);
                     args.putString("RutaSeleccionada", personJsonString);
+                    args.putString("NombreRuta", ruta.getNombre());
+                    args.putInt("TipoColor", tipoColor);
                     args.putInt("PuntoInicial", punto_inicio_ruta);
                     intent.putExtras(args);
                     startActivity(intent);
@@ -124,6 +131,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
         String arg = Utils.getGsonParser().toJson(pi);
         args.putString("PuntoInteres", arg);
+        args.putInt("TipoColor", tipoColor);
         args.putString("EnRuta", "No");
         intent.putExtras(args);
         startActivity(intent);

@@ -36,6 +36,9 @@
         android:layout_height="wrap_content"
         android:text="@string/cultura"
         android:textSize="18sp"
+        android:background="#ff8608"
+        android:layout_margin="2dp"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButtonIconoMonumentos" />
@@ -61,6 +64,9 @@
         android:layout_height="wrap_content"
         android:text="@string/ocio"
         android:textSize="18sp"
+        android:background="#4cb5ff"
+        android:layout_margin="2dp"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonIconoMiradores" />
@@ -86,6 +92,8 @@
         android:layout_height="wrap_content"
         android:text="@string/gastronomia"
         android:textSize="18sp"
+        android:background="#b2ff80"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
