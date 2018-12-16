@@ -7,18 +7,28 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
 import com.elevensteps.provider.sqlite.SqliteProvider;
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PuntoDeInteresActivity extends AppCompatActivity implements View.OnClickListener {
+public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.OnClickListener {
     private TextView descripcion;
     private PuntoInteres puntoInteres;
     private int puntoActual;
@@ -27,7 +37,7 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
     private MediaPlayer mediaPlayer;
     private FloatingActionButton audioButton;
     private FloatingActionButton nextButton;
-    private VideoView video;
+    private YouTubePlayerView video;
     boolean sonando;
     private SqliteProvider provider;
 
@@ -47,7 +57,6 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
         audioButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
 
-        descripcion.setText(R.string.cadena_prueba_descripcion);
         nextButton = findViewById(R.id.NextButton);
         provider = new SqliteProvider(this);
         nextButton.setOnClickListener(this);
@@ -55,18 +64,50 @@ public class PuntoDeInteresActivity extends AppCompatActivity implements View.On
         String str2 = args.get("PuntoInteres").toString();
         puntoInteres = Utils.getGsonParser().fromJson(str2, PuntoInteres.class);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(puntoInteres.getNombre());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setTitle(puntoInteres.getNombre());
         descripcion.setText(puntoInteres.getTexto());
 
         mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
 
         if(puntoInteres.getVideo() instanceof String) {
-            Uri myUri = Uri.parse(puntoInteres.getVideo());
-            video.setVideoURI(myUri);
+            video.initialize("AIzaSyDWnRxlfotXqkcTQYuWyUuDwmo1RjcViGA",
+            new YouTubePlayer.OnInitializedListener() {
+                @Override
+                public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                    YouTubePlayer youTubePlayer, boolean b) {
+
+                    // do any work here to cue video, play video, etc.
+                    String url = puntoInteres.getVideo();
+
+
+                    String video_id = "";
+                    int timestamp= 10000;
+
+                    String cadenas[] = url.split("=");
+
+
+                    for (String str: cadenas ) {
+                        Log.d("MiDebug", str);
+                    }
+
+
+                    if(cadenas.length > 2) {
+                        cadenas[1] = cadenas[1].substring(0, cadenas[1].length()-2); // quitar &t
+                        timestamp = Integer.parseInt(cadenas[2]) * 1000;
+                    }else{
+                        timestamp = 0;
+                    }
+                    video_id = cadenas[1];
+
+                    youTubePlayer.cueVideo(video_id, timestamp);
+                }
+                @Override
+                public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                    YouTubeInitializationResult youTubeInitializationResult) {
+
+                }
+            });
+
         }
 
 
