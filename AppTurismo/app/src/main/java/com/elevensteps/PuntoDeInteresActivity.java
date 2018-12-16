@@ -30,6 +30,7 @@ import java.util.regex.Pattern;
 
 public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.OnClickListener {
     private TextView descripcion;
+    private TextView titulo;
     private PuntoInteres puntoInteres;
     private int puntoActual;
     private Ruta ruta;
@@ -49,6 +50,7 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
 
         sonando = false;
 
+        titulo = findViewById(R.id.titulo);
         descripcion = findViewById(R.id.descripcion);
         video = findViewById(R.id.videoView2);
         audioButton = findViewById(R.id.AudioButton);
@@ -63,8 +65,7 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         args = getIntent().getExtras();
         String str2 = args.get("PuntoInteres").toString();
         puntoInteres = Utils.getGsonParser().fromJson(str2, PuntoInteres.class);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
+        titulo.setText(puntoInteres.getNombre());
         descripcion.setText(puntoInteres.getTexto());
 
         mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
