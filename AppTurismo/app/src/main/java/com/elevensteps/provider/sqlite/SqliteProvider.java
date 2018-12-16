@@ -290,4 +290,22 @@ public final class SqliteProvider {
 
         return true;
     }
+
+    private static final String DOES_PUNTO_EXIST_IN_RUTA = "SELECT 1 FROM contiene WHERE punto_de_interes = ? AND ruta = ?)";
+    private static final String DELETE_PUNTO_INTERES_FROM_RUTA_SQL = "DELETE FROM camino WHERE (punto_de_interes = ? AND ruta = ?)";
+    public boolean deletePuntoInteresFromCamino(PuntoInteres puntoInteres, Ruta ruta) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try(Cursor c = db.rawQuery(DOES_PUNTO_EXIST_IN_RUTA, new String[] { puntoInteres.getNombre(), ruta.getNombre() })) {
+            if(c.getCount() == 0) return false;
+        }
+
+        db.execSQL(DELETE_PUNTO_INTERES_FROM_RUTA_SQL, new String[] { puntoInteres.getNombre(), ruta.getNombre() });
+
+        try(Cursor c = db.rawQuery(DOES_PUNTO_EXIST_IN_RUTA, new String[] { puntoInteres.getNombre(), ruta.getNombre() })) {
+            if(c.getCount() > 0) return false;
+        }
+
+        return true;
+    }
 }
