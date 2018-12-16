@@ -70,7 +70,7 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
 
         if(puntoInteres.getVideo() instanceof String) {
-            video.initialize("AIzaSyDWnRxlfotXqkcTQYuWyUuDwmo1RjcViGA",
+            video.initialize("API HERE",
             new YouTubePlayer.OnInitializedListener() {
                 @Override
                 public void onInitializationSuccess(YouTubePlayer.Provider provider,
