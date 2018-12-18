@@ -18,15 +18,17 @@
 
     <ImageButton
         android:id="@+id/imageButtonIconoMonumentos"
-        android:layout_width="183dp"
-        android:layout_height="113dp"
+        android:layout_width="185dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/desc_imagen_cultura"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintVertical_bias="0.055"
         app:srcCompat="@drawable/cultura" />
 
     <TextView
@@ -34,27 +36,29 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:background="#ff8608"
+        android:padding="8dp"
         android:text="@string/cultura"
         android:textSize="18sp"
-        android:background="#ff8608"
-        android:layout_margin="2dp"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageButtonIconoMonumentos" />
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonIconoMonumentos"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonIconoMonumentos"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonIconoMonumentos" />
 
     <ImageButton
         android:id="@+id/imageButtonIconoMiradores"
-        android:layout_width="184dp"
-        android:layout_height="109dp"
+        android:layout_width="185dp"
+        android:layout_height="110dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/desc_imagen_ocio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMonumentos"
-        app:layout_constraintVertical_bias="0.074"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.48000002"
         app:srcCompat="@drawable/ocio" />
 
     <TextView
@@ -62,27 +66,28 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:background="#4cb5ff"
+        android:padding="8dp"
         android:text="@string/ocio"
         android:textSize="18sp"
-        android:background="#4cb5ff"
-        android:layout_margin="2dp"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonIconoMiradores" />
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonIconoMiradores"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonIconoMiradores"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonIconoMiradores" />
 
     <ImageButton
         android:id="@+id/imageButtonIconoRestaurantes"
-        android:layout_width="183dp"
-        android:layout_height="113dp"
+        android:layout_width="185dp"
+        android:layout_height="110dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/desc_imagen_gastronomia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMiradores"
-        app:layout_constraintVertical_bias="0.353"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.9"
         app:srcCompat="@drawable/gastronomia" />
 
     <TextView
@@ -90,14 +95,14 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/gastronomia"
-        android:textSize="18sp"
+        android:layout_marginTop="85dp"
         android:background="#b2ff80"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonIconoRestaurantes" />
+        android:text="@string/gastronomia"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonIconoRestaurantes"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonIconoRestaurantes"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonIconoRestaurantes" />
 
 
 </android.support.constraint.ConstraintLayout>
