@@ -22,12 +22,14 @@ import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
 import com.elevensteps.provider.sqlite.SqliteProvider;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class DescripcionRutaActivity extends AppCompatActivity implements DescripcionRutasAdapter.ListItemClickListener, View.OnClickListener  {
     DescripcionRutasAdapter mAdapter;
     FloatingActionButton next;
     Ruta ruta;
+    PuntoInteres puntoInicial;
     RecyclerView mRecyclerView;
     SqliteProvider provider;
     ImageView imagen_ruta;
@@ -44,6 +46,7 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         provider = new SqliteProvider(this);
         imagen_ruta = findViewById(R.id.iv_puntosinteres);
 
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
@@ -54,7 +57,12 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
         ruta = Utils.getGsonParser().fromJson(tituloStr, Ruta.class);
         this.setTitle(ruta.getNombre());
-
+        ArrayList<PuntoInteres> puntos = new ArrayList<PuntoInteres>();
+        Collection<PuntoInteres> puntosBD = provider.retrieveCamino(ruta);
+        for( PuntoInteres pto : puntosBD) {
+            puntos.add(pto);
+        }
+        puntoInicial = puntos.get(0);
         next.setOnClickListener(this);
         mAdapter = new DescripcionRutasAdapter( this, getBaseContext(), ruta);
         mRecyclerView.setAdapter(mAdapter);
@@ -102,11 +110,13 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
                         contador++;
                 }
                 if (contador>=2) {
-                    Intent intent = new Intent(this, MapsActivity.class);
+                    Intent intent = new Intent(this, PuntoDeInteresActivity.class);
                     Bundle args = new Bundle();
                     int punto_inicio_ruta = 0;
                     String personJsonString = Utils.getGsonParser().toJson(ruta);
+                    String personJsonString2 = Utils.getGsonParser().toJson(puntoInicial);
                     args.putString("RutaSeleccionada", personJsonString);
+                    args.putString("PuntoInteres", personJsonString2);
                     args.putString("NombreRuta", ruta.getNombre());
                     args.putInt("TipoColor", tipoColor);
                     args.putInt("PuntoInicial", punto_inicio_ruta);
