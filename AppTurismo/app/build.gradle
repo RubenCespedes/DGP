@@ -38,6 +38,6 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    compile files('src/main/libs/YouTubeAndroidPlayerApi.jar')
+    implementation files('src/main/libs/YouTubeAndroidPlayerApi.jar')
 
 }

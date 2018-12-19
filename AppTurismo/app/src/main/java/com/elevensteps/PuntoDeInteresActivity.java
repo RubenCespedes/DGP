@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -74,8 +75,11 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         titulo.setText(puntoInteres.getNombre());
         descripcion.setText(puntoInteres.getTexto());
 
-        mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
-
+        if(puntoInteres.getAudio() instanceof String) {
+            mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
+        }else{
+            audioButton.hide();
+        }
         if(puntoInteres.getVideo() instanceof String) {
             video.initialize("API HERE",
             new YouTubePlayer.OnInitializedListener() {
@@ -109,6 +113,8 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
                 }
             });
 
+        }else{
+            video.setVisibility(View.INVISIBLE);
         }
 
 
