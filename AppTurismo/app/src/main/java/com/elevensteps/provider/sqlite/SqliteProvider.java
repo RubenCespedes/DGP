@@ -29,17 +29,17 @@ public final class SqliteProvider {
         try(Cursor c = db.rawQuery(RETRIEVE_ALL_RUTAS_SQL, new String[] {})) {
 
             arrayList.ensureCapacity(c.getCount());
-            while (c.moveToNext()) {
+            while ( c.moveToNext() ){
                 Ruta obj = Ruta.builder()
-                        .nombre(c.getString(c.getColumnIndex("nombre")))
-                        .descripcion(c.getString(c.getColumnIndex("descripcion")))
-                        .categoria(c.getString(c.getColumnIndex("categoria")))
-                        .nivelCoste(c.getDouble(c.getColumnIndex("nivel_coste")))
-                        .nivelAccesibilidad((c.getDouble(c.getColumnIndex("nivel_accesibilidad"))))
-                        .imagen(c.getString(c.getColumnIndex(("imagen"))))
+                        .nombre( c.getString( c.getColumnIndex( "nombre" ) ) )
+                        .descripcion( c.getString( c.getColumnIndex( "descripcion" ) ) )
+                        .categoria( c.getString( c.getColumnIndex( "categoria" ) ) )
+                        .nivelCoste( c.getDouble( c.getColumnIndex( "nivel_coste" ) ) )
+                        .nivelAccesibilidad( c.getDouble( c.getColumnIndex( "nivel_accesibilidad" ) ) )
+                        .imagen( c.getString( c.getColumnIndex( "imagen" ) ) )
                         .build();
 
-                arrayList.add(obj);
+                arrayList.add( obj );
             }
         }
         return Collections.unmodifiableList(arrayList);
@@ -285,6 +285,24 @@ public final class SqliteProvider {
         db.execSQL(DELETE_PUNTO_INTERES_SQL, new String[] { obj.getNombre() });
 
         try(Cursor c = db.rawQuery(DOES_PUNTO_INTERES_EXIST_SQL, new String[] { obj.getNombre() })) {
+            if(c.getCount() > 0) return false;
+        }
+
+        return true;
+    }
+
+    private static final String DOES_PUNTO_EXIST_IN_RUTA = "SELECT 1 FROM contiene WHERE (punto_de_interes = ? AND ruta = ?)";
+    private static final String DELETE_PUNTO_INTERES_FROM_RUTA_SQL = "DELETE FROM contiene WHERE (punto_de_interes = ? AND ruta = ?)";
+    public boolean deletePuntoInteresFromRuta(PuntoInteres puntoInteres, Ruta ruta) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try(Cursor c = db.rawQuery(DOES_PUNTO_EXIST_IN_RUTA, new String[] { puntoInteres.getNombre(), ruta.getNombre() })) {
+            if(c.getCount() == 0) return false;
+        }
+
+        db.execSQL(DELETE_PUNTO_INTERES_FROM_RUTA_SQL, new String[] { puntoInteres.getNombre(), ruta.getNombre() });
+
+        try(Cursor c = db.rawQuery(DOES_PUNTO_EXIST_IN_RUTA, new String[] { puntoInteres.getNombre(), ruta.getNombre() })) {
             if(c.getCount() > 0) return false;
         }
 

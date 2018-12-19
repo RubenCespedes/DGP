@@ -24,6 +24,6 @@ public @Value class PuntoInteres {
     String video;
 
     public boolean hasCoordinates() {
-        return lat != null && lng != null;
+        return lat != 0.0 && lng != 0.0;
     }
 }

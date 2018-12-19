@@ -7,58 +7,89 @@
     tools:context=".PuntoDeInteresActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/AudioButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="18dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="50dp"
-        android:src="@drawable/ic_surround_sound_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:focusable="true"
-        tools:layout_constraintRight_toRightOf="parent" />
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/NextButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/AudioButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="18dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_fast_forward_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:focusable="auto"
         tools:layout_constraintWidth_default="100dp"
         tools:layout_constraintWidth_max="100dp"
-        tools:layout_constraintWidth_min="50dp" />
+        tools:layout_constraintWidth_min="50dp"
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:src="@drawable/ic_surround_sound_black_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/NextButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="18dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:focusable="true"
+        tools:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/ic_fast_forward_black_24dp" />
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/videoContainer"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
+        android:orientation="vertical">
+
+
+        <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/videoView2"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vídeo (subtítulos y signos)"
+            android:textAlignment="center"/>
+    </android.support.v7.widget.LinearLayoutCompat>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/AudioButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/videoContainer"
+        app:layout_constraintRight_toRightOf="@+id/videoContainer"
+        app:layout_constraintTop_toBottomOf="@+id/videoContainer">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -73,20 +104,12 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/videoView2"
-                app:layout_constraintRight_toRightOf="@+id/videoView2"
-                app:layout_constraintTop_toBottomOf="@+id/videoView2" />
-
-            <VideoView
-                android:id="@+id/videoView2"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="56dp"
-                android:layout_marginRight="16dp"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

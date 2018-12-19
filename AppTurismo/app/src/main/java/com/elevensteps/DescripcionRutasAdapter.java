@@ -69,7 +69,7 @@ public class DescripcionRutasAdapter extends RecyclerView.Adapter<DescripcionRut
     public void onBindViewHolder(@NonNull RutasViewHolder holder, int position) {
         // TODO MEJORAR: Almacenar el texto de la ruta en una variable
         Log.d(TAG, "#" + position + ":" + mPuntosInteres[position]);
-        holder.bind(mPuntosInteres[position].getNombre());
+        holder.bind(position+1 + ". " + mPuntosInteres[position].getNombre());
     }
     public PuntoInteres getElement(int index){
         return mPuntosInteres[index];

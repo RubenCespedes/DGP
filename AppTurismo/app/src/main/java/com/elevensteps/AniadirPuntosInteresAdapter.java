@@ -68,7 +68,7 @@ public class AniadirPuntosInteresAdapter extends RecyclerView.Adapter<AniadirPun
     public void onBindViewHolder(@NonNull PIViewHolder holder, int position) {
         // TODO MEJORAR: Almacenar el texto de la ruta en una variable
         Log.d(TAG, "#" + position + ":" + mPuntosInteres[position]);
-        holder.bind(mPuntosInteres[position].getNombre());
+        holder.bind(mPuntosInteres[position]);
     }
     public PuntoInteres getElement(int index){
         return mPuntosInteres[index];
@@ -94,8 +94,14 @@ public class AniadirPuntosInteresAdapter extends RecyclerView.Adapter<AniadirPun
             itemView.setOnClickListener(this);
         }
 
-        void bind(String nombreRuta){
-            ListNameView.setText(nombreRuta);
+        void bind(PuntoInteres puntoInteres){
+            ListNameView.setText(puntoInteres.getNombre());
+            if (puntosDeInteresSeleccionados.contains(puntoInteres)){
+                ListNameView.setBackgroundColor(Color.GRAY);
+            }
+            else {
+                ListNameView.setBackgroundColor(Color.TRANSPARENT);
+            }
         }
 
         @Override
@@ -105,11 +111,11 @@ public class AniadirPuntosInteresAdapter extends RecyclerView.Adapter<AniadirPun
             PuntoInteres puntoInteres = getItemAt(itemClickPosition);
             if (!puntosDeInteresSeleccionados.contains(puntoInteres)) {
                 puntosDeInteresSeleccionados.add(puntoInteres);
-                view.setBackgroundColor(Color.GRAY);
+                ListNameView.setBackgroundColor(Color.GRAY);
             }
             else {
                 puntosDeInteresSeleccionados.remove(puntoInteres);
-                view.setBackgroundColor(Color.TRANSPARENT);
+                ListNameView.setBackgroundColor(Color.TRANSPARENT);
             }
         }
     }

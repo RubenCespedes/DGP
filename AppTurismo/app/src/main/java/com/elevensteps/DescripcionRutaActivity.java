@@ -20,13 +20,19 @@ import android.widget.Toast;
 
 import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
+import com.elevensteps.provider.sqlite.SqliteProvider;
+
+import java.util.Collection;
 
 public class DescripcionRutaActivity extends AppCompatActivity implements DescripcionRutasAdapter.ListItemClickListener, View.OnClickListener  {
     DescripcionRutasAdapter mAdapter;
     FloatingActionButton next;
     Ruta ruta;
     RecyclerView mRecyclerView;
+    SqliteProvider provider;
     ImageView imagen_ruta;
+    private String tituloStr;
+    private int tipoColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         setContentView(R.layout.activity_descripcion_ruta);
 
         mRecyclerView = findViewById(R.id.rv_puntosinteres);
-        next = findViewById(R.id.ContinueToRute);
+        next = findViewById(R.id.ContinueToRoute);
+        provider = new SqliteProvider(this);
         imagen_ruta = findViewById(R.id.iv_puntosinteres);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -42,8 +49,10 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         mRecyclerView.setHasFixedSize(true);
 
         Bundle args = getIntent().getExtras();
-        String str = args.get("RutaSeleccionada").toString();
-        ruta = Utils.getGsonParser().fromJson(str, Ruta.class);
+        tituloStr = args.get("RutaSeleccionada").toString();
+        tipoColor = args.getInt("TipoColor");
+
+        ruta = Utils.getGsonParser().fromJson(tituloStr, Ruta.class);
         this.setTitle(ruta.getNombre());
 
         next.setOnClickListener(this);
@@ -51,10 +60,11 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
         mRecyclerView.setAdapter(mAdapter);
 
         Context context = imagen_ruta.getContext();
-        int id = context.getResources().getIdentifier("imagen01", "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier( ruta.getImagen(), "drawable", context.getPackageName() );
         imagen_ruta.setImageResource(id);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(tipoColor);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -84,14 +94,29 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.ContinueToRute:
-                Intent intent = new Intent(this, MapsActivity.class);
+            case R.id.ContinueToRoute:
+                Collection<PuntoInteres> puntosBD = provider.retrieveCamino(ruta);
+                int contador = 0;
+                for (PuntoInteres pto : puntosBD) {
+                    if (pto.hasCoordinates())
+                        contador++;
+                }
+                if (contador>=2) {
+                    Intent intent = new Intent(this, MapsActivity.class);
+                    Bundle args = new Bundle();
+                    int punto_inicio_ruta = 0;
+                    String personJsonString = Utils.getGsonParser().toJson(ruta);
+                    args.putString("RutaSeleccionada", personJsonString);
+                    args.putString("NombreRuta", ruta.getNombre());
+                    args.putInt("TipoColor", tipoColor);
+                    args.putInt("PuntoInicial", punto_inicio_ruta);
+                    intent.putExtras(args);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(this, "Las coordenadas de los puntos aún no han sido cargadas", Toast.LENGTH_LONG).show();
+                }
 
-                Bundle args = new Bundle();
-                String arg = Utils.getGsonParser().toJson(ruta);
-                args.putString("RutaSeleccionada", arg);
-                intent.putExtras(args);
-                startActivity(intent);
                 break;
 
         }
@@ -106,6 +131,8 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
 
         String arg = Utils.getGsonParser().toJson(pi);
         args.putString("PuntoInteres", arg);
+        args.putInt("TipoColor", tipoColor);
+        args.putString("EnRuta", "No");
         intent.putExtras(args);
         startActivity(intent);
 

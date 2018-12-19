@@ -1,9 +1,14 @@
 package com.elevensteps;
 
-import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+
 
 import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
@@ -13,27 +18,28 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CustomCap;
-import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.maps.model.RoundCap;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener, View.OnClickListener  {
 
+
+    private static final float ZOOM = 14;
     private GoogleMap mMap;
     private Ruta ruta;
-    SqliteProvider provider;
-    private static final float ZOOM = 18;
-    LatLng isaCatolica = new LatLng(37.175741, -3.597475);
-    LatLng catedral = new LatLng(37.176596, -3.599044);
-    Marker plazaIsa, catedraal;
-    Polyline polyline1, polyline2;
+    private FloatingActionButton sig_punto;
+    private ArrayList<PuntoInteres> puntos = new ArrayList<PuntoInteres>();
+    private ArrayList<Marker> marcadores = new ArrayList<Marker>();
+    private PuntoInteres punto_actual, punto_siguiente;
+    private int punto_inicial_int, punto_destino_int;
+    private SqliteProvider provider;
+    Polyline polyline1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         provider = new SqliteProvider(this);
+        sig_punto = findViewById(R.id.sig_punto);
+
     }
 
 
@@ -57,45 +65,85 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         Bundle args = getIntent().getExtras();
         String str = args.get("RutaSeleccionada").toString();
+        punto_inicial_int = args.getInt("PuntoInicial");
+        punto_destino_int = punto_inicial_int+1;
         ruta = Utils.getGsonParser().fromJson(str, Ruta.class);
-        ArrayList<PuntoInteres> puntos = (ArrayList) provider.retrieveCamino(ruta);
+        Collection<PuntoInteres> puntosBD = provider.retrieveCamino(ruta);
 
-        LatLng punto1 = new LatLng(puntos.get(0).getLat(), puntos.get(0).getLng());
-        LatLng punto2 = new LatLng(puntos.get(1).getLat(), puntos.get(1).getLng());
-        mMap.addMarker(new MarkerOptions().position(punto1).title(puntos.get(0).getNombre()));
-        mMap.addMarker(new MarkerOptions().position(punto2).title(puntos.get(1).getNombre()));
-        LatLng ptoMedio = new LatLng((punto1.latitude+punto2.latitude)/2,(punto1.longitude+punto2.longitude)/2);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ptoMedio, ZOOM-2));
-        /*polyline1 = mMap.addPolyline(new PolylineOptions(). clickable(true).add(
-                new LatLng(37.175741, -3.597475),
-                new LatLng(37.176736, -3.598078),
-                new LatLng(37.176661, -3.598375),
-                new LatLng(37.176935, -3.598539))
-        );
-        polyline1.setColor(0xffff0000);
-        polyline1.setTag("A");
+        for( PuntoInteres pto : puntosBD) {
+            puntos.add(pto);
+            LatLng punto = new LatLng(pto.getLat(),pto.getLng());
+            marcadores.add(mMap.addMarker(new MarkerOptions().position(punto).title(pto.getNombre())));
+
+        }
+        punto_actual = puntos.get(punto_inicial_int);
+        punto_siguiente = puntos.get(punto_destino_int);
+        marcadores.get(punto_inicial_int).setIcon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        marcadores.get(punto_destino_int).setIcon((BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+        marcadores.get(punto_inicial_int).setTitle("Punto inicio: " + marcadores.get(punto_inicial_int).getTitle());
+        marcadores.get(punto_inicial_int).showInfoWindow();
+        marcadores.get(punto_destino_int).setTitle("Punto destino: " + marcadores.get(punto_destino_int).getTitle());
+
+        double latitud_zoom = (punto_actual.getLat() + punto_siguiente.getLat()) / 2;
+        double longitud_zoom = (punto_actual.getLng() + punto_siguiente.getLng()) / 2;
+        LatLng zoom = new LatLng (latitud_zoom, longitud_zoom);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( zoom, ZOOM));
+
+        String title = args.getString("NombreRuta");
+        int color = args.getInt("TipoColor");
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(title);
+        toolbar.setBackgroundColor(color);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        polyline1 = mMap.addPolyline(new PolylineOptions(). clickable(true).add(
+                new LatLng (punto_actual.getLat(), punto_actual.getLng()),
+                new LatLng(punto_siguiente.getLat(), punto_siguiente.getLng())));
+        polyline1.setColor(0xff0000ff);
         polyline1.setClickable(true);
         polyline1.setWidth(20);
-        polyline2= mMap.addPolyline(new PolylineOptions(). clickable(true).add(
-                new LatLng(37.175741, -3.597475),
-                new LatLng(37.175177, -3.598401),
-                new LatLng(37.175753, -3.599112),
-                new LatLng(37.176140, -3.599656))
-        );
-        polyline2.setColor(0x800000ff);
-        polyline2.setTag("B");
-        polyline2.setClickable(true);
-        polyline2.setWidth(10);
-        googleMap.setOnPolylineClickListener(this);
-        plazaIsa = mMap.addMarker(new MarkerOptions().position(isaCatolica).title("Plaza Isabel La Católica").snippet("Plaza con estatua de Isabel la Católica"));
-        catedraal = mMap.addMarker(new MarkerOptions().position(catedral).title("Catedral de Granada").snippet("Catedral del siglo XVIII"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(isaCatolica, ZOOM));*/
+
+        sig_punto.setOnClickListener(this);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.sig_punto :
+
+                Intent intent = new Intent(this, PuntoDeInteresActivity.class);
+                Bundle args = new Bundle();
+
+                String personJsonString = Utils.getGsonParser().toJson(ruta);
+                String personJsonString2 = Utils.getGsonParser().toJson(punto_siguiente);
+                args.putString("RutaSeleccionada", personJsonString);
+                args.putString("PuntoInteres", personJsonString2);
+                args.putInt("PuntoActual", punto_destino_int);
+                intent.putExtras(args);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
@@ -104,15 +152,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case "A":
                 polyline1.setColor(0xffff0000);
                 polyline1.setWidth(20);
-                polyline2.setColor(0x800000ff);
-                polyline2.setWidth(10);
+                //polyline2.setColor(0x800000ff);
+                //polyline2.setWidth(10);
                 Toast.makeText(this, "Ruta con accesibilidad para todos los públicos", Toast.LENGTH_SHORT).show();
                 break;
             case "B":
                 polyline1.setColor(0x80ff0000);
                 polyline1.setWidth(10);
-                polyline2.setColor(0xff0000ff);
-                polyline2.setWidth(20);
+                //polyline2.setColor(0xff0000ff);
+                //polyline2.setWidth(20);
                 Toast.makeText(this, "Ruta no accesible para personas con movilidad reducida", Toast.LENGTH_SHORT).show();
         }
     }

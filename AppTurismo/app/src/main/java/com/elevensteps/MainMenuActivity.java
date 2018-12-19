@@ -2,8 +2,6 @@ package com.elevensteps;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -77,11 +75,12 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private void FiltradoPorTipos(Filtro tipo) {
         Context context = MainMenuActivity.this;
 
-        Class destinationActivity = activity_seleccion_ruta.class;
+        Class destinationActivity = SeleccionRutaActivity.class;
 
         Intent intent = new Intent(context, destinationActivity);
 
         intent.putExtra("TipoFiltro", tipo.name());
+        intent.putExtra("ColorFiltro", tipo.getColor());
         startActivity(intent);
     }
 
