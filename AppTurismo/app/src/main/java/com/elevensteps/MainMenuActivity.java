@@ -32,7 +32,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.titulo_elegir_categoria);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -48,9 +48,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.ic_admin:
-                Intent i = new Intent(this, AdminOptionsActivity.class);
-                startActivity(i);
+            case android.R.id.home:
+                onBackPressed();
                 return true;
         }
 

@@ -11,7 +11,7 @@
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:padding="0dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@android:color/black"
@@ -23,44 +23,47 @@
         android:id="@+id/AudioButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_surround_sound_black_24dp"
+        app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:focusable="auto"
         tools:layout_constraintWidth_default="100dp"
-        tools:layout_constraintWidth_max="100dp"
-        tools:layout_constraintWidth_min="50dp"
 
-        android:src="@drawable/ic_surround_sound_black_24dp" />
+        tools:layout_constraintWidth_max="100dp"
+        tools:layout_constraintWidth_min="50dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/NextButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="50dp"
+        android:src="@drawable/ic_fast_forward_black_24dp"
+        app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:focusable="true"
-        tools:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_fast_forward_black_24dp" />
+        tools:layout_constraintRight_toRightOf="parent" />
 
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <LinearLayout
         android:id="@+id/videoContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@+id/titulo">
 
 
         <com.google.android.youtube.player.YouTubePlayerView
@@ -71,6 +74,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
 
+            android:background="@null"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -78,39 +82,33 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vídeo (subtítulos y signos)"
-            android:textAlignment="center"/>
-    </android.support.v7.widget.LinearLayoutCompat>
+            android:text="@string/info_video"
+            android:textAlignment="center" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/videoContainer"
         app:layout_constraintRight_toRightOf="@+id/videoContainer"
         app:layout_constraintTop_toBottomOf="@+id/videoContainer">
 
-        <android.support.constraint.ConstraintLayout
+        <TextView
+            android:id="@+id/descripcion"
+            style="@style/TextAppearance.AppCompat.Large"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/descripcion"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="100dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </android.support.constraint.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </ScrollView>
 
 

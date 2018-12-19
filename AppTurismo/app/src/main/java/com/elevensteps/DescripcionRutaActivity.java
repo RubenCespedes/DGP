@@ -91,10 +91,6 @@ public class DescripcionRutaActivity extends AppCompatActivity implements Descri
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.ic_admin:
-                Intent i = new Intent(this, AdminOptionsActivity.class);
-                startActivity(i);
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }

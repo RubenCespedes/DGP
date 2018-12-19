@@ -26,4 +26,11 @@
     <string name="cultura">Cultura</string>
     <string name="ocio">Ocio</string>
     <string name="gastronomia">Gastronomía</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="modo_de_usuario">Modo de Usuario</string>
+    <string name="modo_de_administrador">Modo de Administrador</string>
+    <string name="logo_de_appturismo_ver_c_editos">Logo de AppTurismo (ver cŕeditos)</string>
+    <string name="tutorial_ruta">Pulse sobre un punto de interés para obtener información adiccional.
+        Puede pulsar el botón de la esquina inferior derecha para iniciar la ruta</string>
+    <string name="info_video">Vídeo (subtítulos y signos)</string>
 </resources>
