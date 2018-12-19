@@ -10,11 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageButton botonMonumentos;
     private ImageButton botonMiradores;
     private ImageButton botonRestaurantes;
+    private TextView textoMonumentos;
+    private TextView textoMiradores;
+    private TextView textoRestaurantes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +29,17 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         botonMiradores = (ImageButton) findViewById(R.id.imageButtonIconoMiradores);
         botonRestaurantes = (ImageButton) findViewById(R.id.imageButtonIconoRestaurantes);
 
+        textoMonumentos = (TextView) findViewById(R.id.textViewMonumentos);
+        textoMiradores = (TextView) findViewById(R.id.textViewMiradores);
+        textoRestaurantes = (TextView) findViewById(R.id.textViewRestaurantes);
+
         botonMonumentos.setOnClickListener(this);
         botonMiradores.setOnClickListener(this);
         botonRestaurantes.setOnClickListener(this);
+
+        textoMonumentos.setOnClickListener(this);
+        textoMiradores.setOnClickListener(this);
+        textoRestaurantes.setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,12 +73,15 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imageButtonIconoMonumentos:
+            case R.id.textViewMonumentos:
                 FiltradoPorTipos(Filtro.Cultura);
                 break;
             case R.id.imageButtonIconoMiradores:
+            case R.id.textViewMiradores:
                 FiltradoPorTipos(Filtro.Ocio);
                 break;
             case R.id.imageButtonIconoRestaurantes:
+            case R.id.textViewRestaurantes:
                 FiltradoPorTipos(Filtro.Gastronomia);
                 break;
         }
