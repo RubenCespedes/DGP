@@ -75,12 +75,13 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         titulo.setText(puntoInteres.getNombre());
         descripcion.setText(puntoInteres.getTexto());
 
-        if(puntoInteres.getAudio() instanceof String) {
+        if(puntoInteres.getAudio() != null) {
             mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
-        }else{
+        } else{
             audioButton.hide();
         }
-        if(puntoInteres.getVideo() instanceof String) {
+
+        if(puntoInteres.getVideo() != null) {
             video.initialize("API HERE",
             new YouTubePlayer.OnInitializedListener() {
                 @Override
@@ -113,11 +114,9 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
                 }
             });
 
-        }else{
-            video.setVisibility(View.INVISIBLE);
+        } else {
+            findViewById(R.id.videoContainer).setVisibility(View.GONE);
         }
-
-
 
     }
 
