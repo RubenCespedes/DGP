@@ -33,4 +33,20 @@
     <string name="tutorial_ruta">Pulse sobre un punto de interés para obtener información adiccional.
         Puede pulsar el botón de la esquina inferior derecha para iniciar la ruta</string>
     <string name="info_video">Vídeo (subtítulos y signos)</string>
+    <string name="info_imagen">Imagen</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="app_about">Sobre AppTurismo</string>
+    <string name="app_description">Esta aplicación, desarrollada por el grupo 11Steps, es un proyecto de clase para la asignatura de Dirección y Gestión de Proyectos del Grado en Ingeniería Informática de la Universidad de Granada</string>
+    <string name="app_team">El Equipo</string>
+    <string name="app_team_members">
+        Alejandro Núñez Pérez\n
+        Ángela Pozo Mateos\n
+        Sergio López Ayala\n
+        Jose Fidel Ariza Álvarez\n
+        Diego Alfonso Candelaria Rodríguez\n
+        David Infante Casas,\n
+        Ruben Céspedes Heredia,\n
+        Diego Alfonso Candelaria Rodríguez,\n
+        José Ramón Guillén López
+    </string>
 </resources>

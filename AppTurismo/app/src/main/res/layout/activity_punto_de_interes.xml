@@ -57,9 +57,9 @@
 
 
     <LinearLayout
-        android:id="@+id/videoContainer"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/resContainer"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
         android:orientation="vertical"
@@ -69,16 +69,12 @@
 
 
         <com.google.android.youtube.player.YouTubePlayerView
-            android:id="@+id/videoView2"
+            android:id="@+id/youtubeView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-
-            android:background="@null"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="260dp" />
 
         <TextView
+            android:id="@+id/resLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/info_video"
@@ -91,9 +87,9 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/videoContainer"
-        app:layout_constraintRight_toRightOf="@+id/videoContainer"
-        app:layout_constraintTop_toBottomOf="@+id/videoContainer">
+        app:layout_constraintLeft_toLeftOf="@+id/resContainer"
+        app:layout_constraintRight_toRightOf="@+id/resContainer"
+        app:layout_constraintTop_toBottomOf="@+id/resContainer">
 
         <TextView
             android:id="@+id/descripcion"

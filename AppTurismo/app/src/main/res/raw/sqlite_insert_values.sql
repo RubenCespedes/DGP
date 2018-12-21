@@ -98,10 +98,10 @@ INSERT INTO punto_interes(nombre, lng, lat, texto, direccion, precio, audio, ima
      VALUES
      ('Bar Los Diamantes', -3.598220, 37.173684,
      'Especialidad en tapas de pescado como almejas o boquerones en acogedor bar y restaurante con terraza',
-     'Calle Navas, 28, 18009 Granada', 0.00, NULL, 'diamantes', NULL),
+     'Calle Navas, 28, 18009 Granada', 0.00, 'bar1', 'diamantes', NULL),
      ('Restaurante Tinta Fina', -3.598598, 37.173085,
      'Comedor de estilo moderno con toques futuristas para vinos, cocina fusión japonesa y pescados a la espalda',
-     'Calle Ángel Ganivet, 18009 Granada', 0.0, NULL, 'tinta_fina', NULL),
+     'Calle Ángel Ganivet, 18009 Granada', 0.0, 'bar1', 'tinta_fina', NULL),
      ('Restaurante EntreBrasas', -3.598408, 37.173700,
      'Restaurante situado en calle navas especializado en carne a la brasa y churrascos',
      'Calle Navas, 27, 18009 Granada', 0.0, NULL, 'entre_brasas', NULL);

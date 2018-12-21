@@ -2,21 +2,13 @@ package com.elevensteps;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
+
 import com.elevensteps.model.PuntoInteres;
 import com.elevensteps.model.Ruta;
 import com.elevensteps.provider.sqlite.SqliteProvider;
@@ -26,8 +18,6 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.OnClickListener {
     private TextView descripcion;
@@ -54,7 +44,7 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
 
         titulo = findViewById(R.id.titulo);
         descripcion = findViewById(R.id.descripcion);
-        video = findViewById(R.id.videoView2);
+        video = findViewById(R.id.youtubeView);
         audioButton = findViewById(R.id.AudioButton);
         nextButton = findViewById(R.id.NextButton);
 
@@ -78,44 +68,53 @@ public class PuntoDeInteresActivity extends YouTubeBaseActivity implements View.
         if(puntoInteres.getAudio() != null) {
             mediaPlayer = MediaPlayer.create(PuntoDeInteresActivity.this, R.raw.fachada);
         } else{
-            audioButton.hide();
+            audioButton.setVisibility(View.GONE);
         }
 
         if(puntoInteres.getVideo() != null) {
             video.initialize("API HERE",
-            new YouTubePlayer.OnInitializedListener() {
-                @Override
-                public void onInitializationSuccess(YouTubePlayer.Provider provider,
-                                                    YouTubePlayer youTubePlayer, boolean b) {
+                    new YouTubePlayer.OnInitializedListener() {
+                        @Override
+                        public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                            YouTubePlayer youTubePlayer, boolean b) {
 
-                    // do any work here to cue video, play video, etc.
-                    String url = puntoInteres.getVideo();
+                            // do any work here to cue video, play video, etc.
+                            String url = puntoInteres.getVideo();
 
 
-                    String video_id = "";
-                    int timestamp= 10000;
+                            String video_id = "";
+                            int timestamp = 10000;
 
-                    String cadenas[] = url.split("=");
+                            String cadenas[] = url.split("=");
 
-                    if(cadenas.length > 2) {
-                        cadenas[1] = cadenas[1].substring(0, cadenas[1].length()-2); // quitar &t
-                        timestamp = Integer.parseInt(cadenas[2]) * 1000;
-                    }else{
-                        timestamp = 0;
-                    }
-                    video_id = cadenas[1];
+                            if (cadenas.length > 2) {
+                                cadenas[1] = cadenas[1].substring(0, cadenas[1].length() - 2); // quitar &t
+                                timestamp = Integer.parseInt(cadenas[2]) * 1000;
+                            } else {
+                                timestamp = 0;
+                            }
+                            video_id = cadenas[1];
 
-                    youTubePlayer.cueVideo(video_id, timestamp);
-                }
-                @Override
-                public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                    YouTubeInitializationResult youTubeInitializationResult) {
+                            youTubePlayer.cueVideo(video_id, timestamp);
+                        }
 
-                }
-            });
+                        @Override
+                        public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                            YouTubeInitializationResult youTubeInitializationResult) {
 
+                        }
+                    });
+
+        } else if(puntoInteres.getImagen() != null) {
+            int resId = getResources().getIdentifier(puntoInteres.getImagen(), "drawable", getPackageName());
+            if(resId != 0) {
+                findViewById(R.id.resContainer).setBackgroundResource(resId);
+                findViewById(R.id.resLabel).setVisibility(View.GONE);
+                video.setVisibility(View.INVISIBLE);
+
+            }
         } else {
-            findViewById(R.id.videoContainer).setVisibility(View.GONE);
+            findViewById(R.id.resContainer).setVisibility(View.GONE);
         }
 
     }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 MainActivity.this.startActivity(
                         new Intent(MainActivity.this, AdminOptionsActivity.class)
+                );
+            }
+        });
+
+        ImageButton ibAppLogo = findViewById(R.id.ibAppLogo);
+        ibAppLogo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.startActivity(
+                        new Intent(MainActivity.this, AboutActivity.class)
                 );
             }
         });
